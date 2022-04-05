@@ -7,3 +7,4 @@ We will work on actors and the sequence diagram collectively (enemies + player)
 Date the deliverable + review will be completed by: 10/04/2022
 
 Andy: I accept this WBA
+Ivan: I accept
