@@ -12,6 +12,21 @@ extends the Action class from engine
 Added dependency between Consumable and Actor
 Added dependency between Consumable and ConsumeAction
 
+Documenting important dependency between Consumable and Actor:
+I will add a consume(Actor player) method to the Consumable interface that generates the effects of consuming a consumable item 
+(e.g. consuming Super Mushroom grants 50 max hp and TALL status, then removes item from inventory, but it needs access to the
+player to do so)
+
+Documenting important dependency between Consumable and ConsumeAction:
+Each consumable item will add a ConsumeAction to their respective allowableActions list with the player (Actor) and 
+itself (Consumable) as the parameter so that the execute method in the ConsumeAction class can call consume on the Consumable
+with the player as a parameter, i.e. Consumable.consume(player)
+
+So far, this diagram follows all the principles. Consumables are easily extendable and existing code do not need to be modified even if
+a new consumable has new effects of consumption (OCP). 
+Higher levels will always depend on the Consumable interface rather than low levels like the items themselves (DIP).
+ConsumeAction takes the role of consuming the item, the items themselves take care of their own effects of consumption (SRP)
+LSP and ISP are clearly not violated here
 
 
 
