@@ -1,0 +1,17 @@
+Created items package, added Super Mushroom class and Power Star class inside the package, both extending from Item class
+in the engine
+
+Since Super Mushroom and Power Star are both consumable items, I will add a ‘Consumable’ interface 
+for consumable items so that OCP is followed if any future consumable items are added. 
+Both Super Mushroom and Power Star will implement this interface.
+
+Created actions package and added a ConsumeAction class to handle the action of consuming the consumable items, 
+extends the Action class from engine
+
+
+Added dependency between Consumable and Actor
+Added dependency between Consumable and ConsumeAction
+
+
+
+
