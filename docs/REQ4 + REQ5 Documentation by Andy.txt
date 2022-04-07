@@ -1,0 +1,1 @@
+Created Super Mushroom class and Power Star class, both extending from Item
