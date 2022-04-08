@@ -1,0 +1,33 @@
+Recommending reading REQ4 Documentation and UML diagram first
+
+Added BuyAction that extends Action and WalletManager
+WalletManager has a private constructor to prevent instantiation and has a private attribute of itself which can be 
+retrieved by calling getInstance
+
+I chose to add WalletManager instead of adding a private attribute called wallet into player so I don't need
+to downcast Actor to Player when using BuyAction to check for wallet. Additionally, by logic, having a singleton wallet manager makes sense 
+because only the player of the game will need access to the wallet. This also allows for extension of the wallet system
+
+
+Added PickupCoinAction that handles picking up coins that instantly add credits to WalletManager
+
+
+PickupCoinAction has association to Actor and Coin class since they need to be kept as attributes to show the appropriate message in menu.
+Also, the execute method needs to know the coin to remove the coin from the map afterwards. 
+The value of the coin also needs to be accessible.
+
+Justification for the 0..* multiplicity between Actor and PickUpCoinAction is that an actor can have multiple PickUpCoinActions if 
+there are multiple coins in the same location. 
+
+PickupCoinAction has an important dependency with WalletManager since it must call getInstance then add the appropriate 
+amount of credits corresponding to the coin's worth.
+
+Initially, I wanted to rename Coin to Valuables and make it abstract, create a PickupValuableAction class, then create a 
+Coin class which extends Valuable so that the game can add new valuable items such as Diamonds or Sapphires 
+that give some other functionalities too when picked up.
+Even though this would follow OCP, I concluded it to be not worth the unnecessary complexity because
+it seemed highly unlikely a Mario game would add other instantly consumed currency items with different functionalities. 
+
+
+
+
