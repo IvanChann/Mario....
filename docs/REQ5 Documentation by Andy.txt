@@ -44,6 +44,8 @@ BuyAction has a dependency with WalletManager and an association with BuyableIte
 add the BuyableItem to the player's inventory after deducting the balance from WalletManager, or if there is not enough credits,
 then the item isn't added.
 
+See BuyAction sequence diagram
+
 
 
 
