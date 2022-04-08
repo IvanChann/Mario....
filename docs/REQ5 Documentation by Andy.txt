@@ -29,5 +29,21 @@ Even though this would follow OCP, I concluded it to be not worth the unnecessar
 it seemed highly unlikely a Mario game would add other instantly consumed currency items with different functionalities. 
 
 
+Added BuyableItem abstract class that extends Item, containing abstract method getPrice(). 
+Made Super Mushroom and Power Star extend BuyableItem. Created Wrench class that extends BuyableItems
+
+Added Toad class that extends Actor and keeps an ArrayList of BuyableItems that he can sell by iterating through the 
+array and creating BuyActions for each item
+
+The reason I used an abstract class over an interface is because in my design, BuyAction needs to add an instance of Item to
+a player's inventory using addItemToInventory(Item item) which does not accept an instance of interface. Using an abstract
+class that extends Item avoids casting.
+
+
+
+
+
+
+
 
 
