@@ -1,0 +1,48 @@
+Created items package, added Super Mushroom class and Power Star class inside the package, both extending from Item abstract class
+in the engine
+
+Since Super Mushroom and Power Star are both consumable items, I will add a ‘Consumable’ interface 
+for consumable items so that OCP is followed if any future consumable items are added. 
+Both Super Mushroom and Power Star will implement this interface.
+
+Created actions package and added a ConsumeAction class to handle the action of consuming the consumable items, 
+extends the Action class from engine. Has association with Actor and Consumable because both need to be kept track of
+to complete the action.
+Justification for 0..* multiplicity between Actor and ConsumeAction because there can be multiple items in the actor's
+inventory that may be consumed
+
+Added dependency between Consumable and Actor
+
+Documenting important dependency between Consumable and Actor:
+I will add a consumedBy(Actor player) method to the Consumable interface that generates the effects of consuming a consumable item 
+(e.g. consuming Super Mushroom grants 50 max hp and TALL status, then the item is removed from inventory, but access to the
+player is required accomplish this)
+Can use tick method to generate ConsumeAction and pass the Actor instance
+
+So far, this diagram follows all the principles. Consumables are easily extendable and existing code do not need to be modified even if
+a new consumable has new effects of consumption (OCP). 
+ConsumeAction depends on the Consumable interface rather than low levels like the items themselves (DIP).
+ConsumeAction takes the role of consuming the item, the items themselves take care of their own effects of consumption (SRP)
+LSP and ISP are clearly not violated here
+
+Added dependency between High Ground and Status because canActorEnter should return true if player has the 
+GLOWING Status (from consuming Super Star)
+and also because High Ground should convert to Dirt IF actor is standing on that location. (can be implemented by overriding Tick method)
+
+Added Coin class in items package and made it extend from Item abstract class in engine
+High Ground has dependency with Coin because tick method should add a Coin to the location of the (former) high ground if a GLOWING 
+player stands on it
+
+Added dependency between AttackAction and Status because of the GLOWING status check when attacking or receiving damage
+
+
+
+
+
+
+
+
+
+
+
+
