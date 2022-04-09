@@ -1,17 +1,17 @@
 Recommending reading REQ4 Documentation and UML diagram first
 
-Added BuyAction that extends Action and WalletManager
+Added BuyItemAction that extends Action and WalletManager
 
 WalletManager has a private constructor to prevent instantiation and has a private attribute of itself which can be 
 retrieved by calling getInstance. Thus, it has an association with itself
 
 I chose to add WalletManager instead of adding a private attribute called wallet into player so I don't need
-to downcast Actor to Player when using BuyAction to check for wallet. Additionally, by logic, having a singleton wallet manager makes sense 
+to downcast Actor to Player when using BuyItemAction to check for wallet. Additionally, by logic, having a singleton wallet manager makes sense 
 because only the player of the game will need access to the wallet. This also allows for extension of the wallet system
-
+since it also allows other actors to collect coins FOR the player, such as coin collectors, which wouldn't be possible if we
+used a wallet attribute for specific actors which requires downcasting.
 
 Added PickupCoinAction that handles picking up coins that instantly add credits to WalletManager
-
 
 PickupCoinAction has association to Actor and Coin class since they need to be kept as attributes to show the appropriate message in menu.
 Also, the execute method needs to know the coin to remove the coin from the map afterwards. 
@@ -30,21 +30,29 @@ Even though this would follow OCP, I concluded it to be not worth the unnecessar
 it seemed highly unlikely a Mario game would add other instantly consumed currency items with different functionalities. 
 
 
-Added BuyableItem abstract class that extends Item, containing abstract method getPrice(). 
-Made Super Mushroom and Power Star extend BuyableItem. Created Wrench class that extends BuyableItems
+Added BuyableItem interface containing method getPrice(). 
+Made Super Mushroom and Power Star implement BuyableItem. Created Wrench class that extends Item and implements BuyableItem
+Don't have relationship between Item and Super Mushroom/Power Star because it's in REQ4 UML Class diagram
 
-Added Toad class that extends Actor and has an association with BuyableItems because he keeps an ArrayList of 
-BuyableItems that he can sell by iterating through the array and creating BuyActions for each item
+Reason I added a BuyableItem interface is to account for future buyable items that might be added (Open for extension)
 
-The reason I used an abstract class over an interface is because in my design, BuyAction needs to add an instance of Item to
-a player's inventory using addItemToInventory(Item item) which does not accept an instance of interface. Using an abstract
-class that extends Item avoids casting.
+Added Toad class that extends Actor and has an association with BuyableItem because he keeps an ArrayList of 
+BuyableItems that he can sell by iterating through the array and creating BuyItemActions for each buyable item
 
-BuyAction has a dependency with WalletManager and an association with BuyableItem and Actor because it needs to be able to
-add the BuyableItem to the player's inventory after deducting the balance from WalletManager, or if there is not enough credits,
+BuyItemAction has a dependency with WalletManager and an association with BuyableItem and Actor because it needs to be able to
+add the buyable item to the player's inventory after deducting the balance from WalletManager, or if there is not enough credits,
 then the item isn't added.
 
-See BuyAction sequence diagram
+See BuyItemAction sequence diagram
+
+Justification for type-casting in BuyItemAction:
+BuyItemAction casts BuyableItem to Item since addItemToInventory only accepts an instance of Item. But the type-casting here
+is fine because BuyableItem is guaranteed to be an item, and any buyable item is safe to be added into the player's inventory
+unless implemented incorrectly. 
+The only ways to avoid this type-cast are to either remove the BuyableItem interface and make BuyItemAction's constructor take an 
+instance of Item rather than BuyableItem, or to make BuyableItem an abstract class which extends item, which 
+doesn't make much sense because we can have a WeaponItem that is buyable, such as the wrench, which obviously can only extend
+from one abstract class.
 
 
 

@@ -34,7 +34,7 @@ player stands on it
 
 Added dependency between AttackAction and Status because of the GLOWING status check when attacking or receiving damage
 
-Made Super Mushroom and Power Star extend from BuyableItem which extends from Item. Read REQ5 for more information
+Made Super Mushroom and Power Star implement BuyableItem interface. Read REQ5 for more information
 
 
 
