@@ -1,0 +1,12 @@
+ResetAction is a new class that extends from Action.
+ResetAction will be added to the Player's actionList in the playTurn method if the player currently has the status "CAN_RESET".
+The enum "CAN_RESET" will be added to the capabilityList in the Player's constructor.
+Once the user has used ResetAction the capability will be removed and as a result will no longer be able to use ResetAction again.
+
+ResetAction class has a dependency on the GameMap and the Player. It will iterate through each Location in the GameMap and check the reset
+conditions eg. if location contains tree, if location contains actor. It will then "reset" those things eg. if it contains a tree 50% 
+chance to reset to dirt. Then it will iterate through the Player's CapabilityList and remove any statuses and heal the player to a maximum.
+
+This implementation will only need to add one extra class. As ResetAction extends from Action no other changes need to be made in order to 
+implement this class other than adding a few things to the Player class. Implenting the actual "reset" is made easier as there are many
+helpful methods in Location and Actor that can be utilized.
