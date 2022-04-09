@@ -8,5 +8,6 @@ conditions eg. if location contains tree, if location contains actor. It will th
 chance to reset to dirt. Then it will iterate through the Player's CapabilityList and remove any statuses and heal the player to a maximum.
 
 This implementation will only need to add one extra class. As ResetAction extends from Action no other changes need to be made in order to 
-implement this class other than adding a few things to the Player class. Implenting the actual "reset" is made easier as there are many
-helpful methods in Location and Actor that can be utilized.
+implement this class other than adding a few things to the Player class and dependencies are kept to a minimum
+clearly showing adherence to the Open-Closed Principle and Dependency Inversion Principle.
+Implementing the actual "reset" is made easier as there are many helpful methods in Location and Actor that can be utilized.

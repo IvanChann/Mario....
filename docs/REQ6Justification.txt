@@ -7,5 +7,5 @@ When the execute method is called from TalkAction it will iterate through the pl
 and will add sentences to a list based on the given requirements not adding the ones that shouldn't be displayed.
 It will then randomly select one to be returned which will then be displayed through the processActorTurn method in World class.
 
-This implementation doesn't modify any existing classes and only adds new ones.
-More conditional dialogue options can be easily added.
+This implementation doesn't modify any existing classes and only adds new ones showing and more conditional dialogue options can be easily added
+clearly showing the Open-Closed Principle.
