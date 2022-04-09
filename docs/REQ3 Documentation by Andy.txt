@@ -1,0 +1,10 @@
+Added Goomba and Koopa class extending Actor
+Initially thought about adding Enemy abstract class to avoid DRY but then realised
+the overriden methods in each Enemy class will still be different to each other.
+
+Both Goomba and Koopa's attack damage can be handled by overriding getIntrinsicWeapon
+
+Overriding the PlayTurn method can handle the 10% chance of removing Goomba from the map
+
+Dormant state will be kept as a Boolean within the Koopa class, and Koopa will behave
+differently depending on whether it is dormant or not
