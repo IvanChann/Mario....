@@ -1,0 +1,11 @@
+Add TalkAction to the ActionList in Toad's allowableActions method. 
+This means anytime Player is adjacent to Toad the TalkAction will be allowed.
+This follows the system already in place for actions the player can take.
+
+TalkAction is a class that extends from the Action class.
+When the execute method is called from TalkAction it will iterate through the players inventory and capabilityList
+and will add sentences to a list based on the given requirements not adding the ones that shouldn't be displayed.
+It will then randomly select one to be returned which will then be displayed through the processActorTurn method in World class.
+
+This implementation doesn't modify any existing classes and only adds new ones showing and more conditional dialogue options can be easily added
+clearly showing the Open-Closed Principle.
