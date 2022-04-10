@@ -1,3 +1,5 @@
+READ THE PDF FILE, THIS FILE IS THE RAW TXT VERSION
+
 Recommending reading REQ4 Documentation and UML diagram first
 
 Added BuyItemAction that extends Action and WalletManager
@@ -33,7 +35,7 @@ it seemed highly unlikely a Mario game would add other instantly consumed curren
 Created Wrench class that extends WeaponItem
 Doesn't have relationship between Item and Super Mushroom/Power Star because it's in REQ4 UML Class diagram
 
-Added Toad class that extends Actor and has an association with Item because he keeps an ArrayList of 
+Added Toad class that extends NPC and has an association with Item because he keeps an ArrayList of 
 Items that he can sell by iterating through the array and creating BuyItemActions for each item
 
 BuyItemAction has a dependency with WalletManager and an association with Item and Actor because it needs to be able to

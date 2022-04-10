@@ -1,3 +1,5 @@
+READ THE PDF FILE, THIS FILE IS THE RAW TXT VERSION
+
 Added NPC abstract class to extend Actor, since all NPCs have some sort of system to keep
 track of behaviours (HashMap), friendly and hostile included. Allows for extension.
 The HashMap of behaviours will be kept in this class with a getter. Also follows DRY

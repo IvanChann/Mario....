@@ -1,3 +1,5 @@
+READ THE PDF FILE, THIS FILE IS THE RAW TXT VERSION
+
 Created items package, added Super Mushroom class and Power Star class inside the package, both extending from Item abstract class
 in the engine
 
