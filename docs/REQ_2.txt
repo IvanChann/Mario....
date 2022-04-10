@@ -1,0 +1,26 @@
+Added JumpAction that extends Action. The JumpAction will be used by player to jump over higher grounds.
+
+Engine to wall: What actions is the player allowed
+wall to engine: The player can perform JumpAction
+engine to player: You can do JumpAction on wall
+
+Jump option will be displayed to the user in the menu.
+
+Each object will have a debuff option.
+Like Wall has 80% success and 20 fall damage
+Sprout has 90% success and 10 fall damage
+Sapling has 80% success and 20 fall damage
+Mature has 90% success and 30 fall damage
+
+Dependency between HighGround and Status so we can further find out at what stage the high ground has reached like
+for Trees or if the player has consumed Super star which means it can go over anything without jumping. 
+
+Dependency between Status and CapabilitySet, as for each HighGround terrain we need to implement what capabilities each
+terrain has like the succes rates for each jump of differnet terrain.
+
+Dependency between JumpAction and Status as we need to use this to debuff player depening on different HighGround and different 
+success rates for each jump.
+
+
+
+
