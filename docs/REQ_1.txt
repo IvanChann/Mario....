@@ -1,0 +1,20 @@
+Add a Sprout class, Sapling, 
+
+Use GroundFactory to spwan new Sprouts at start.
+
+Sprout, Sapling, Tree and Wall are created as an abstract class of HighGround and then Ground to make it more 
+extendable as what does count as a high ground and what doesnt. As a player has to jump on high ground whereas
+can walk straight onto floor & dirt.
+Hence, following the open closed principle. As it open to extension but not modification.
+
+The HighGround's value is stored in status so we can further find out at what stage the high ground has reached like
+for Trees.
+
+10% chance for goomba to spawn at Sprout(+) every turn
+10% chance to drop a 20$ coin at Sapling(t) every turn
+15% chance to spawn Koopa every turn
+20% chance tree dies and become dirt every turn
+
+
+Every turn we have different options possible for each Tree. Which are implemented using the CapabalitySet.
+
