@@ -1,11 +1,17 @@
-Andy - Will produce Magical Items and handle Trading mechanics. UML
-Ivan - Monologue and reset mechanic. UML
-Anan - Tree mechanics + Jump mechanic. UML
+Andy - Will produce Magical Items and handle Trading mechanics REQ4 + REQ5
+Ivan - Monologue and reset mechanic. REQ 6 + REQ7
+Anan - Tree mechanics + Jump mechanic. REQ 1 + REQ2
+- Edit: Same for coding
 
 We will work on actors and the sequence diagram collectively (enemies + player)
 
+
 Date the deliverable + review will be completed by: 10/04/2022
+- WBA2: Updated date for Assignment 2 = 22/04/2022 for fully functional code to be committed and pushed
 
 Andy: I accept this WBA
 Ivan: I accept
 Anant: I accept this WBA
+
+WBA 2 Accepting:
+Andy: I accept this WBA
