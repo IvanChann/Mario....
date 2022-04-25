@@ -1,5 +1,7 @@
 package game.reset;
 
+import edu.monash.fit2099.engine.positions.GameMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * A3: Think about how will you improve this implementation in the future assessment.
  * What could be the drawbacks of this implementation?
  */
-public class ResetManager {
+public class ResetManager{
     /**
      * A list of resettable instances (any classes that implements Resettable,
      * such as Player implements Resettable will be stored in here)
@@ -44,7 +46,14 @@ public class ResetManager {
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
-    public void run(){
+    public void run(GameMap map){
+        List<Resettable> toClean = new ArrayList<>();
+        for (Resettable reset: resettableList){
+            if (reset.resetInstance(map)){
+                toClean.add(reset);
+            }
+        }
+        cleanUp(toClean);
     }
 
     /**
@@ -52,6 +61,7 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void appendResetInstance(Resettable reset){
+        resettableList.add(reset);
     }
 
 
@@ -61,5 +71,11 @@ public class ResetManager {
      * FIXME: it does nothing, you need to implement it :)
      */
     public void cleanUp(Resettable resettable){
+        resettableList.remove(resettable);
+
+    }
+
+    public void cleanUp(List<Resettable> resettable){
+        resettableList.removeAll(resettable);
     }
 }

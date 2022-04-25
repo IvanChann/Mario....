@@ -7,4 +7,7 @@ package game.enums;
 public enum Status {
     HOSTILE_TO_ENEMY, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
     TALL, // use this status to tell that current instance has "grown".
+    HAS_WRENCH,
+    GLOWING,
+    CAN_RESET
 }
