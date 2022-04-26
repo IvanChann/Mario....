@@ -1,4 +1,47 @@
 package game.items;
 
-public class SuperMushroom {
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
+import game.actions.ConsumeAction;
+import game.statuses.Status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SuperMushroom extends Item implements Consumable, Purchasable{
+    private boolean added = false;
+    /***
+     * Constructor.
+     * @param portable true if and only if the Item can be picked up
+     */
+    public SuperMushroom(boolean portable) {
+
+        super("Super Mushroom", '^', portable);
+    }
+
+
+    @Override
+    public void consumedBy(Actor actor) {
+        actor.increaseMaxHp(50);
+        actor.addCapability(Status.TALL);
+        // IMPLEMENT 100% JUMP HERE
+        actor.removeItemFromInventory(this);
+
+    }
+    public List<Action> getAllowableActions() {
+        ArrayList<Action> actions = new ArrayList<>();
+        actions.add(new ConsumeAction(this));
+        return actions;
+    }
+
+    @Override
+    public void purchasedBy(Actor actor) {
+        actor.addItemToInventory(this);
+    }
+
+    @Override
+    public int getPrice() {
+        return 400;
+    }
 }
