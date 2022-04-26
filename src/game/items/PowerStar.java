@@ -42,6 +42,34 @@ public class PowerStar extends Item implements Consumable, Purchasable{
             currentLocation.removeItem(this);
         }
     }
+    @Override
+    public void consumedBy(Actor actor) {
+        this.consumed = true;
+        actor.heal(200);
+        this.addCapability(Status.GLOWING);
+        this.timer = 10;
+    }
+
+    @Override
+    public void purchasedBy(Actor actor) {
+        actor.addItemToInventory(this);
+    }
+
+    @Override
+    public int getPrice() {
+        return 600;
+    }
+
+    @Override
+    public List<Action> getAllowableActions() {
+        if (!consumed) {
+            ArrayList<Action> actions = new ArrayList<>();
+            actions.add(new ConsumeAction(this));
+            return actions;
+        }
+        return super.getAllowableActions();
+    }
+}
 
 
 
