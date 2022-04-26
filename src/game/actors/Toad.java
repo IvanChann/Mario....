@@ -39,6 +39,14 @@ public class Toad extends NPC{
         return new DoNothingAction();
     }
 
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        for (Purchasable item : buyables) {
+            actions.add(new BuyItemAction(otherActor, item, item.getPrice()));
+
+        }
+        return actions;
+    }
 
 
 }
