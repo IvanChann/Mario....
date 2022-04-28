@@ -6,7 +6,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.enums.Status;
+import game.managers.WalletManager;
+import game.statuses.Status;
 
 /**
  * Class representing the Player.
@@ -33,8 +34,18 @@ public class Player extends Actor  {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+		System.out.println("Mario" + this.printHp() + "  at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() +")");
+		System.out.println("Wallet: $"+ WalletManager.getInstance().getBalance());
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
+	}
+
+	@Override
+	public void hurt(int points) {		// overrode hurt method since if ANY damage is taken, removes TALL
+		super.hurt(points);
+		if (points > 0 && this.hasCapability(Status.TALL)){
+			this.removeCapability(Status.TALL);
+		}
 	}
 
 	@Override
