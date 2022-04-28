@@ -8,11 +8,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.managers.WalletManager;
 import game.statuses.Status;
+import game.actions.ResetAction;
+import game.reset.Resettable;
 
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 
@@ -26,6 +28,8 @@ public class Player extends Actor  {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.addCapability((Status.CAN_RESET));
+		registerInstance();
 	}
 
 	@Override
@@ -36,6 +40,10 @@ public class Player extends Actor  {
 
 		System.out.println("Mario" + this.printHp() + "  at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() +")");
 		System.out.println("Wallet: $"+ WalletManager.getInstance().getBalance());
+		if (this.hasCapability(Status.CAN_RESET)){
+			actions.add(new ResetAction());
+		}
+
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
@@ -51,5 +59,18 @@ public class Player extends Actor  {
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	}
+
+	@Override
+	public boolean resetInstance(GameMap map) {
+		if (this.hasCapability(Status.GLOWING)){
+			this.removeCapability(Status.GLOWING);
+		}
+		if (this.hasCapability(Status.TALL)){
+			this.removeCapability(Status.TALL);
+		}
+		this.heal(9999);
+
+		return false;
 	}
 }

@@ -10,5 +10,5 @@ public enum Status {
     GLOWING, // effect from consuming Power Star
     CAN_DESTROY_SHELL,
     CANNOT_ENTER_FLOOR,
-
+    CAN_RESET
 }
