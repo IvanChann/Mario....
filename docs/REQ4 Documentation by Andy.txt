@@ -4,7 +4,7 @@ Created items package, added Super Mushroom class and Power Star class inside th
 in the engine
 
 Since Super Mushroom and Power Star are both consumable items, I will add a ‘Consumable’ interface with a 
-consumedBy(Actor actor) method for consumable items so that OCP is followed if any future consumable items are added. 
+consumedBy method for consumable items so that OCP is followed if any future consumable items are added. 
 Both Super Mushroom and Power Star will implement this interface.
 
 Created actions package and added a ConsumeAction class to handle the action of consuming the consumable items, 
@@ -14,10 +14,11 @@ to use it to call the consumedBy method, as well as to display the correct messa
 
 Added dependency between Consumable and Actor
 
-Documenting important dependency between Consumable and Actor:
-The consumedBy(Actor actor) method in the Consumable interface will generate the effects of consuming a consumable item 
+Documenting important dependencies between Consumable, GameMap and Actor, :
+The consumedBy(Actor actor, GameMap map) method in the Consumable interface will generate the effects of consuming a consumable item 
 (e.g. consuming Super Mushroom grants 50 max hp and TALL status, then the item is removed from inventory, but access to the
 player is required accomplish this)
+If the item is consumed from the ground, then we can use GameMap to remove it
 
 
 So far, this diagram follows all the principles. Consumables are easily extendable and existing code do not need to be modified even if
