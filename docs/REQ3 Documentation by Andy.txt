@@ -1,12 +1,16 @@
 READ THE PDF FILE, THIS FILE IS THE RAW TXT VERSION
 
-Added NPC abstract class to extend Actor, since all NPCs have some sort of system to keep
-track of behaviours (HashMap), friendly and hostile included. Allows for extension.
-The HashMap of behaviours will be kept in this class with a getter. Also follows DRY
+If you believe a relationship between classes is missing, it might be because the relationship is already included in the
+other UML diagrams
+
+
+Added NPC abstract class to extend Actor, since all NPCs have a TreeMap<Integer, Behaviour> to
+keep track of the behaviours and the priority associated with the behaviours, friendly and hostile included. Allows for extension.
+The TreeMap of behaviours will be kept in this class with a getter that returns an unmodifiable copy to follow
+defensive copying, also follows DRY. 
 
 Added Enemy abstract class extending NPC, reason being that ALL enemies cannot enter floor,
 and it is likely that in the future there will be some other feature exclusive to enemies implemented, follows DRY.
-Enemy's constructor's body adds new capability CANNOT_ENTER_FLOOR
 All future enemy classes added can extend this class
 
 Added Goomba and Koopa class extending Enemy to diagram
@@ -14,23 +18,27 @@ Added Goomba and Koopa class extending Enemy to diagram
 Added AttackBehaviour that implements Behaviour, will scan the actor's surroundings
 if it finds an actor with HOSTILE_TO_ENEMY it will return an AttackAction
 
-Modify Floor such that canActorEnter returns False for any actors with CANNOT_ENTER_FLOOR capability
+Modified AttackBehaviour, FollowBehaviour and WanderBehaviour to store a constant PRIORITY indicating the priority of the behaviour
+in the behaviour system. Avoids connascence of meaning/magic numbers
+
+Modified Floor such that canActorEnter returns False for any actors with CANNOT_ENTER_FLOOR capability
 Therefore added a noteworthy dependency between Floor and Status
 
-Both Goomba and Koopa's attack damage can be handled by overriding getIntrinsicWeapon
+Both Goomba and Koopa's attack damage are handled by overriding getIntrinsicWeapon
 
 Overriding the PlayTurn method can handle the 10% chance of removing Goomba from the map
-Additionally, the PlayTurn method can be used to check the enemy's surroundings, if the enemy
-spots an actor with HOSTILE_TO_ENEMY, a FollowBehaviour will be added to their behaviours
+
+FollowBehaviour is added in allowableActions since allowableActions is called in the engine only when
+the actors are near each other
 
 Dormant state will be kept as a Boolean attribute within the Koopa class, and Koopa will behave
-differently depending on whether it is dormant or not. 
+differently depending on whether it is dormant or not. This follows SRP
 
 isConscious method will be overriden for Koopa to always return true, but if its health points
 is not greater than 0, then the dormant attribute will be set to true, and its display character
 will be changed to D
 
-Wrench's shell destroying capability can be implemented by using addCapability in the body
+Wrench's shell destroying capability is implemented by using addCapability in the body
 of its constructor. Thus, there is a noteworthy dependency between Wrench and Status
 
 Added DestroyShellAction that extends Action. 
