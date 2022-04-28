@@ -29,7 +29,6 @@ public class Koopa extends Enemy {
         this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
     }
 
-
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(30, "decimates");
@@ -49,6 +48,15 @@ public class Koopa extends Enemy {
         }
 
         return actions;
+    }
+    
+    @Override
+    public boolean isConscious() {
+        if (!super.isConscious()){
+            this.dormant = true;
+            this.setDisplayChar('D');
+        }
+        return true;
     }
 
     @Override
