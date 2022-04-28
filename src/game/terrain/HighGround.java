@@ -1,21 +1,36 @@
 package game.terrain;
 
-/**
- * Base class for all high ground's
- */
-public interface HighGround {
-    /**
-     * The amount of damage the ground will inflict on an unsuccessful jump
-     *
-     * @return the damage, in hitpoints
-     */
-    int damage();
+
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Ground;
+import edu.monash.fit2099.engine.positions.Location;
+import game.items.Coin;
+import game.statuses.Status;
+
+public abstract class HighGround extends Ground {
 
     /**
-     * The success rate for each jump for this ground
+     * Constructor.
      *
-     * @return the success rate, in %/100
+     * @param displayChar character to display for this type of terrain
      */
-    double successRate();
+    public HighGround(char displayChar) {
+        super(displayChar);
+    }
 
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        if (actor.hasCapability(Status.GLOWING)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void tick(Location location) {
+        if (location.containsAnActor() && location.getActor().hasCapability(Status.GLOWING)){
+            location.setGround(new Dirt());
+            location.addItem(new Coin(5));
+        }
+    }
 }
