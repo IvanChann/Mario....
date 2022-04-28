@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SuperMushroom extends Item implements Consumable, Purchasable{
-    private boolean added = false;
+    private int price = 400;
+
     /***
      * Constructor.
      * @param portable true if and only if the Item can be picked up
@@ -42,6 +43,6 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
 
     @Override
     public int getPrice() {
-        return 400;
+        return price;
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class PowerStar extends Item implements Consumable, Purchasable{
     private int timer = 10;
+    private int price = 600;
     private boolean consumed = false;
 
     //private Actor actor;
@@ -30,17 +31,20 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     @Override
     public void tick(Location currentLocation, Actor actor) {
         this.timer -= 1;
+        System.out.println(timer + " turns of power star remaining");
         if (this.timer == 0){
             actor.removeItemFromInventory(this);
         }
-        System.out.println(timer + " turns of power star remaining");
+
 
     }
     public void tick(Location currentLocation){
         this.timer -= 1;
-        if (this.timer == 0){
+        System.out.println(timer + " turns of power star remaining");
+        if (this.timer == 0 || consumed){
             currentLocation.removeItem(this);
         }
+
     }
     @Override
     public void consumedBy(Actor actor) {
@@ -57,7 +61,7 @@ public class PowerStar extends Item implements Consumable, Purchasable{
 
     @Override
     public int getPrice() {
-        return 600;
+        return price;
     }
 
     @Override
