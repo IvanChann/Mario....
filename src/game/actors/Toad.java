@@ -12,11 +12,11 @@ import game.items.Purchasable;
 import game.items.SuperMushroom;
 import game.items.Wrench;
 import game.actions.TalkAction;
-import game.enums.Status;
+import game.statuses.Status;
 
 import java.util.ArrayList;
 
-public class Toad extends NPC{
+public class Toad extends NPC {
 
     private ArrayList<Purchasable> buyables = new ArrayList<>();
 
@@ -45,20 +45,21 @@ public class Toad extends NPC{
         ActionList actions = new ActionList();
         for (Purchasable item : buyables) {
             actions.add(new BuyItemAction(item, item.getPrice()));
-        ArrayList<String> dialogues = new ArrayList<>();
-
-        if (!otherActor.hasCapability(Status.HAS_WRENCH)){
-            dialogues.add("You might need a wrench to smash Koopa's hard shells.");
         }
-        if (!otherActor.hasCapability(Status.GLOWING)){
-            dialogues.add("You better get back to finding the Power Stars.");
-        }
-        dialogues.add("The Princess is depending on you! You are our only hope.");
-        dialogues.add("Being imprisoned in these walls can drive a fungus crazy :(");
 
-        actions.add(new TalkAction(this, dialogues));
-        return actions;
+            ArrayList<String> dialogues = new ArrayList<>();
+
+            if (!otherActor.hasCapability(Status.CAN_DESTROY_SHELL)) {
+                dialogues.add("You might need a wrench to smash Koopa's hard shells.");
+            }
+            if (!otherActor.hasCapability(Status.GLOWING)) {
+                dialogues.add("You better get back to finding the Power Stars.");
+            }
+            dialogues.add("The Princess is depending on you! You are our only hope.");
+            dialogues.add("Being imprisoned in these walls can drive a fungus crazy :(");
+
+            actions.add(new TalkAction(this, dialogues));
+            return actions;
+        }
     }
 
-
-}
