@@ -1,8 +1,8 @@
 READ THE PDF FILE, THIS FILE IS THE RAW TXT VERSION
 
-Recommending reading REQ4 Documentation and UML diagram first
+Recommending reading REQ4 Documentation and UML diagram first since some classes that appear to be missing relationships have already been added in previous UML diagrams
 
-Added BuyItemAction that extends Action and WalletManager
+Added BuyItemAction that extends Action
 
 WalletManager has a private constructor to prevent instantiation and has a private attribute of itself which can be 
 retrieved by calling getInstance. Thus, it has an association with itself
@@ -15,8 +15,8 @@ used a wallet attribute for specific actors which requires downcasting.
 
 Added PickupCoinAction that handles picking up coins that instantly add credits to WalletManager
 
-PickupCoinAction has association to Actor and Coin class since they need to be kept as attributes to show the appropriate message in menu.
-Also, the execute method needs to know the coin to remove the coin from the map afterwards. 
+PickupCoinAction has an association with the Coin class since it needs to be kept as an attribute to remove it from the map 
+as well as show the appropriate message in menu.
 The value of the coin also needs to be accessible.
 
 Justification for the 0..* multiplicity between Actor and PickUpCoinAction is that an actor can have multiple PickUpCoinActions if 
@@ -25,21 +25,20 @@ there are multiple coins in the same location.
 PickupCoinAction has an important dependency with WalletManager since it must call getInstance then add the appropriate 
 amount of credits corresponding to the coin's worth.
 
-Initially, I wanted to rename Coin to Valuables and make it abstract, create a PickupValuableAction class, then create a 
-Coin class which extends Valuable so that the game can add new valuable items such as Diamonds or Sapphires 
-that give some other functionalities too when picked up.
-Even though this would follow OCP, I concluded it to be not worth the unnecessary complexity because
-it seemed highly unlikely a Mario game would add other instantly consumed currency items with different functionalities. 
 
+Added Purchasable interface with the methods purchasedBy(Actor actor) and getPrice() so that all buyable items present and future
+can implement this interface. Follows OCP
+The purchasedBy method allows us to add the item to the user's inventory without typecasting
 
-Created Wrench class that extends WeaponItem
-Doesn't have relationship between Item and Super Mushroom/Power Star because it's in REQ4 UML Class diagram
+Created Wrench class that extends WeaponItem and implements Purchasable
 
-Added Toad class that extends NPC and has an association with Item because he keeps an ArrayList of 
-Items that he can sell by iterating through the array and creating BuyItemActions for each item
+Made PowerStar and SuperMushroom also implement Purchasable
 
-BuyItemAction has a dependency with WalletManager and an association with Item and Actor because it needs to be able to
-add the buyable item to the player's inventory after deducting the balance from WalletManager, or if there is not enough credits,
+Added Toad class that extends NPC and has an association with Purchasable because he keeps an ArrayList of 
+Purchable items that he can sell by iterating through the array and creating BuyItemActions for each item
+
+BuyItemAction has a dependency with WalletManager and an association with Purchasable because it needs to be able to
+call the purchasedBy method, (which will add the buyable item to the player's inventory) after deducting the balance from WalletManager, or if there is not enough credits,
 then the item isn't added.
 
 See BuyItemAction sequence diagram
