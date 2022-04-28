@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ConsumeAction;
 import game.statuses.Status;
 
@@ -23,7 +24,10 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
 
 
     @Override
-    public void consumedBy(Actor actor) {
+    public void consumedBy(Actor actor, GameMap map) {
+        if (map.locationOf(actor).getItems().size() != 0) {
+            map.locationOf(actor).removeItem(this);
+        }
         actor.increaseMaxHp(50);
         actor.addCapability(Status.TALL);
         // IMPLEMENT 100% JUMP HERE

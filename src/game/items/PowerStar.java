@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.statuses.Status;
@@ -41,13 +42,16 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     public void tick(Location currentLocation){
         this.timer -= 1;
         System.out.println(timer + " turns of power star remaining");
-        if (this.timer == 0 || consumed){
+        if (this.timer == 0){
             currentLocation.removeItem(this);
         }
 
     }
     @Override
-    public void consumedBy(Actor actor) {
+    public void consumedBy(Actor actor, GameMap map) {
+        if (map.locationOf(actor).getItems().size() != 0) {
+            map.locationOf(actor).removeItem(this);
+        }
         this.consumed = true;
         actor.heal(200);
         this.addCapability(Status.GLOWING);
