@@ -9,8 +9,11 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Goomba;
+import game.actors.Koopa;
 import game.actors.Player;
 import game.actors.Toad;
+import game.items.PowerStar;
+import game.items.SuperMushroom;
 import game.terrain.Dirt;
 import game.terrain.Floor;
 import game.terrain.Tree;
@@ -55,12 +58,14 @@ public class Application {
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
-			gameMap.at(44,11).addActor(new Toad());
+			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));
 
-			// FIXME: the Goomba should be generated from the Tree
-			gameMap.at(35, 10).addActor(new Goomba());
+			gameMap.at(42, 9).addItem(new PowerStar(true));
 
-			world.run();
+			gameMap.at(42, 11).addItem(new SuperMushroom(true));
+
+
+		world.run();
 
 	}
 }

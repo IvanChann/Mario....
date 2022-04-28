@@ -7,12 +7,13 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.enums.Status;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
+import game.statuses.Status;
 import game.behaviours.WanderBehaviour;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
-import game.reset.ResetManager;
-import game.reset.Resettable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,20 +21,23 @@ import java.util.Map;
  * A little fungus guy.
  */
 public class Goomba extends Actor implements Resettable {
-	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
 	/**
 	 * Constructor.
 	 */
 	public Goomba() {
-		super("Goomba", 'g', 50);
-		this.behaviours.put(10, new WanderBehaviour());
 		registerInstance();
+		super("Goomba", 'g', 20);
+		this.addBehaviour(WanderBehaviour.PRIORITY, new WanderBehaviour());
+		this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
+
+
+
 	}
 
 	/**
 	 * At the moment, we only make it can be attacked by Player.
 	 * You can do something else with this method.
+	 *
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
@@ -43,11 +47,16 @@ public class Goomba extends Actor implements Resettable {
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		ActionList actions = new ActionList();
-		// it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
-		if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			actions.add(new AttackAction(this,direction));
+		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+			actions.add(new AttackAction(this, direction));
 		}
+		this.addBehaviour(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
 		return actions;
+	}
+
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(10, "obliterates");
 	}
 
 	/**
@@ -56,10 +65,15 @@ public class Goomba extends Actor implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		for(Behaviour Behaviour : behaviours.values()) {
-			Action action = Behaviour.getAction(this, map);
-			if (action != null)
+		if (Math.random() <= 0.1) {
+			map.removeActor(this);
+			return new DoNothingAction();
+		}
+		for (Behaviour behaviour : this.getBehaviours().values()) {
+			Action action = behaviour.getAction(this, map);
+			if (action != null) {
 				return action;
+			}
 		}
 		return new DoNothingAction();
 	}
