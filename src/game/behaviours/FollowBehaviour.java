@@ -15,6 +15,7 @@ import game.behaviours.Behaviour;
  */
 public class FollowBehaviour implements Behaviour {
 
+	public static final Integer PRIORITY = 20;
 	private final Actor target;
 
 	/**

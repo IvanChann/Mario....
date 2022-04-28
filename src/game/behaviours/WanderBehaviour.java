@@ -11,6 +11,8 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.behaviours.Behaviour;
 
 public class WanderBehaviour extends Action implements Behaviour {
+
+	public static final Integer PRIORITY = 30;
 	
 	private final Random random = new Random();
 
