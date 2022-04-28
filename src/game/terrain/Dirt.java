@@ -3,6 +3,7 @@ package game.terrain;
 import edu.monash.fit2099.engine.positions.Ground;
 import game.enums.Status;
 
+
 /**
  * A class that represents bare dirt.
  */
