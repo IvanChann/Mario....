@@ -10,24 +10,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
+import game.reset.Resettable;
 import game.statuses.Status;
 import game.behaviours.WanderBehaviour;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
-
-import java.util.HashMap;
-import java.util.Map;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Enemy {
-
-
+public class Goomba extends NPC implements Resettable {
 	/**
 	 * Constructor.
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
+		registerInstance();
 		this.addBehaviour(WanderBehaviour.PRIORITY, new WanderBehaviour());
 		this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
 
@@ -62,7 +59,6 @@ public class Goomba extends Enemy {
 
 	/**
 	 * Figure out what to do next.
-	 *
 	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
 	 */
 	@Override
@@ -78,5 +74,11 @@ public class Goomba extends Enemy {
 			}
 		}
 		return new DoNothingAction();
+	}
+
+	@Override
+	public boolean resetInstance(GameMap map) {
+		map.removeActor(this);
+		return true;
 	}
 }
