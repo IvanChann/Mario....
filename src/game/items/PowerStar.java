@@ -49,7 +49,7 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     }
     @Override
     public void consumedBy(Actor actor, GameMap map) {
-        if (map.locationOf(actor).getItems().size() != 0) {
+        if (map.locationOf(actor).getItems().contains(this)) {
             map.locationOf(actor).removeItem(this);
         }
         this.consumed = true;
