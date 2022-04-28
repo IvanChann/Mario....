@@ -58,14 +58,14 @@ public class Application {
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
-			gameMap.at(42, 12).addActor(new Toad("Toad", 'o', 100));
+			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));
 
-			gameMap.at(42, 13).addItem(new PowerStar(true));
+			gameMap.at(42, 9).addItem(new PowerStar(true));
 
 			gameMap.at(42, 11).addItem(new SuperMushroom(true));
 
 
-			world.run();
+		world.run();
 
 	}
 }

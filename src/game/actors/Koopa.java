@@ -49,7 +49,7 @@ public class Koopa extends Enemy {
 
         return actions;
     }
-    
+
     @Override
     public boolean isConscious() {
         if (!super.isConscious()){
@@ -66,7 +66,6 @@ public class Koopa extends Enemy {
         }
         for (Behaviour behaviour : this.getBehaviours().values()) {
             Action action = behaviour.getAction(this, map);
-            System.out.println(behaviour);
             if (action != null) {
                 return action;
             }
