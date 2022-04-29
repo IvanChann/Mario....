@@ -18,7 +18,7 @@ import game.behaviours.Behaviour;
 /**
  * A little fungus guy.
  */
-public class Goomba extends NPC implements Resettable {
+public class Goomba extends Enemy	 implements Resettable {
 	private boolean remove = false;
 	/**
 	 * Constructor.
