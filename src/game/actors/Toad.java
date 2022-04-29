@@ -47,19 +47,25 @@ public class Toad extends NPC {
             actions.add(new BuyItemAction(item, item.getPrice()));
         }
 
-            ArrayList<String> dialogues = new ArrayList<>();
-
-            if (!otherActor.hasCapability(Status.CAN_DESTROY_SHELL)) {
-                dialogues.add("You might need a wrench to smash Koopa's hard shells.");
-            }
-            if (!otherActor.hasCapability(Status.GLOWING)) {
-                dialogues.add("You better get back to finding the Power Stars.");
-            }
-            dialogues.add("The Princess is depending on you! You are our only hope.");
-            dialogues.add("Being imprisoned in these walls can drive a fungus crazy :(");
-
-            actions.add(new TalkAction(this, dialogues));
+            actions.add(new TalkAction(this, getDialogue(otherActor)));
             return actions;
-        }
     }
+
+    public ArrayList<String> getDialogue(Actor otherActor){
+        ArrayList<String> dialogues = new ArrayList<>();
+
+        if (!otherActor.hasCapability(Status.CAN_DESTROY_SHELL)) {
+            dialogues.add("You might need a wrench to smash Koopa's hard shells.");
+        }
+        if (!otherActor.hasCapability(Status.GLOWING)) {
+            dialogues.add("You better get back to finding the Power Stars.");
+        }
+        dialogues.add("The Princess is depending on you! You are our only hope.");
+        dialogues.add("Being imprisoned in these walls can drive a fungus crazy :(");
+
+        return dialogues;
+    }
+
+}
+
 
