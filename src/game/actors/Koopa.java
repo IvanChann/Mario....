@@ -18,6 +18,7 @@ import game.statuses.Status;
 
 public class Koopa extends Enemy implements Resettable {
     private boolean dormant = false;
+    private boolean remove = false;
 
     /**
      * Constructor.
@@ -63,6 +64,10 @@ public class Koopa extends Enemy implements Resettable {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (remove) {
+            map.removeActor(this);
+            return new DoNothingAction();
+        }
         if (dormant){
             return new DoNothingAction();
         }
@@ -76,9 +81,8 @@ public class Koopa extends Enemy implements Resettable {
     }
 
     @Override
-    public boolean resetInstance(GameMap map) {
-        map.removeActor(this);
-        return true;
+    public boolean resetInstance() {
+        return remove = true;
     }
 }
 

@@ -19,6 +19,7 @@ import game.behaviours.Behaviour;
  * A little fungus guy.
  */
 public class Goomba extends NPC implements Resettable {
+	private boolean remove = false;
 	/**
 	 * Constructor.
 	 */
@@ -63,7 +64,7 @@ public class Goomba extends NPC implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		if (Math.random() <= 0.1) {
+		if (Math.random() <= 0.1 || this.remove) {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
@@ -77,8 +78,7 @@ public class Goomba extends NPC implements Resettable {
 	}
 
 	@Override
-	public boolean resetInstance(GameMap map) {
-		map.removeActor(this);
-		return true;
+	public boolean resetInstance() {
+		return remove = true;
 	}
 }

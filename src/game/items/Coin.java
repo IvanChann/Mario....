@@ -41,7 +41,7 @@ public class Coin extends Item implements Resettable {
     }
 
     @Override
-    public boolean resetInstance(GameMap map) {
+    public boolean resetInstance() {
         return remove = true;
     }
 }

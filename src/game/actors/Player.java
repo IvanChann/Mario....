@@ -62,8 +62,7 @@ public class Player extends Actor implements Resettable {
 	}
 
 	@Override
-	public boolean resetInstance(GameMap map) {
-		// NEED TO DO POWER STAR RESET
+	public boolean resetInstance() {
 		if (this.hasCapability(Status.GLOWING)){
 			this.removeCapability(Status.GLOWING);
 		}

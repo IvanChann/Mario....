@@ -8,7 +8,7 @@ public interface Resettable {
      * HINT: play around with capability, the actual implementation happens in the tick or playTurn method.
      * TODO: execute this method in a reset manager later.
      */
-    boolean resetInstance(GameMap map);
+    boolean resetInstance();
 
     /**
      * a default interface method that register current instance to the Singleton manager.

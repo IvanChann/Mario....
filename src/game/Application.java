@@ -12,6 +12,7 @@ import game.actors.Goomba;
 import game.actors.Koopa;
 import game.actors.Player;
 import game.actors.Toad;
+import game.items.Coin;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.terrain.Dirt;
@@ -59,10 +60,13 @@ public class Application {
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));
-
+			gameMap.at(0, 0).addActor(new Goomba());
+			gameMap.at(1, 0).addActor(new Koopa());
 			gameMap.at(42, 9).addItem(new PowerStar(true));
 
 			gameMap.at(42, 11).addItem(new SuperMushroom(true));
+			gameMap.at(42, 12).addItem(new Coin(69));
+			gameMap.at(42, 13).addItem(new Coin(69));
 
 
 		world.run();
