@@ -17,23 +17,8 @@ public class Wall extends HighGround {
 		return true;
 	}
 
-	/**
-	 * Accessor for damage done by this ground.
-	 *
-	 * @return the damage
-	 */
-	@Override
-	public int damage(int damage){
-		return damage;
-	};
 
-	/**
-	 * Accessor for success rate for each jump for this ground.
-	 *
-	 * @return the success rate.
-	 */
-	@Override
-	public double successRate(double successRate) {
-		return successRate;
-	}
+
+
+
 }

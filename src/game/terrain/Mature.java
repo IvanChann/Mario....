@@ -10,13 +10,19 @@ import game.actors.Koopa;
 import game.actors.Player;
 import game.statuses.Status;
 
+import javax.print.attribute.standard.Destination;
+import java.util.ArrayList;
+import java.util.Random;
+
 
 public class Mature extends HighGround{
     public int age;
-    Exit exit;
+    private int damage = 30;
+    private final Random random = new Random();
 
     public Mature() {
         super('T', 30, 0.7);
+
         age = 0;
     }
 
@@ -32,32 +38,28 @@ public class Mature extends HighGround{
                 location.addActor(new Koopa());
             }
         }
+        if (age%5 == 0 && age != 0){
+            ArrayList<Location> fertileGround = new ArrayList<>();
+            for (Exit exits : location.getExits()){
 
-        if (!exit.getDestination().containsAnActor() && exit.getDestination().getGround().hasCapability(Status.FERTILE)){
-            exit.getDestination().setGround(new Sprout());
+                if (exits.getDestination().getGround().hasCapability(Status.FERTILE)){
+                    fertileGround.add(exits.getDestination());
+                }
+
+
+            }
+
+
+            Location randomFertile = fertileGround.get(random.nextInt(fertileGround.size()));
+            randomFertile.setGround(new Sprout());
+
         }
-    }
-    /**
-     * Accessor for damage done by this ground.
-     *
-     * @return the damage
-     */
-    @Override
-    public int damage(int damage){
-        return damage;
-    };
-
-    /**
-     * Accessor for success rate for each jump for this ground.
-     *
-     * @return the success rate.
-     */
-    @Override
-    public double successRate(double successRate) {
-        return successRate;
-    }
-
-
+        }
 }
+
+
+
+
+
 
 

@@ -17,7 +17,7 @@ import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.terrain.Dirt;
 import game.terrain.Floor;
-import game.terrain.Tree;
+import game.terrain.Sprout;
 import game.terrain.Wall;
 
 /**
@@ -30,7 +30,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",

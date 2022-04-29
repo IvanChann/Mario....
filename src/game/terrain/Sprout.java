@@ -5,9 +5,8 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.statuses.Status;
 
-public class Sprout extends HighGround{
+public class Sprout extends HighGround {
     private int age;
-    public Location location;
 
     public Sprout() {
         super('+', 10, 0.9);
@@ -17,33 +16,14 @@ public class Sprout extends HighGround{
     @Override
     public void tick(Location location) {
         age++;
-        if(getDisplayChar() != 'g') {
-            if (age==10){
+        if (getDisplayChar() != 'g') {
+            if (age == 10) {
                 location.setGround(new Sapling());
             }
-            if (getDisplayChar() == '+' && Math.random()<0.1){
+            if (getDisplayChar() == '+' && Math.random() < 0.1) {
                 location.addActor(new Goomba());
             }
         }
     }
-
-    /**
-     * Accessor for damage done by this ground.
-     *
-     * @return the damage
-     */
-    @Override
-    public int damage(int damage){
-        return damage;
-    };
-
-    /**
-     * Accessor for success rate for each jump for this ground.
-     *
-     * @return the success rate.
-     */
-    @Override
-    public double successRate(double successRate) {
-        return successRate;
-    }
 }
+

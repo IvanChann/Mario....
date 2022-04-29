@@ -16,6 +16,8 @@ import java.util.List;
  */
 public abstract class HighGround extends Ground {
     HighGround highGround;
+    private int damage;
+    private double successRate;
 
 
     /**
@@ -26,7 +28,8 @@ public abstract class HighGround extends Ground {
      */
     public HighGround(char displayChar, int damage, double successRate){
         super(displayChar);
-        this.addCapability(Status.JUMP);
+        this.damage = damage;
+        this.successRate = successRate;
     }
 
     @Override
@@ -36,6 +39,13 @@ public abstract class HighGround extends Ground {
         }
         return false;
     }
+
+    public double getSuccessRate(){
+        return successRate;
+    }
+    public int damage(){
+        return damage;
+    };
 
     @Override
     public void tick(Location location) {

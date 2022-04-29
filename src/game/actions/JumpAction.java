@@ -23,10 +23,7 @@ public class JumpAction extends Action {
 
         Weapon weapon = actor.getWeapon();
         Ground jumpLocation = location.getGround();
-
-        if (ground.hasCapability(Status.JUMP)){
-            if (Math.random() < weapon.);
-        }
+        return null;
     }
 
     @Override
