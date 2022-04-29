@@ -12,23 +12,30 @@ import edu.monash.fit2099.engine.positions.Location;
 
 
 public class JumpAction extends Action {
-    private Ground ground;
-    private Location location;
+    private HighGround highGround;
+    private String direction;
+    private Location jumpLocation;
 
-    public JumpAction(Ground ground){
-        this.ground = ground;
+    public JumpAction(HighGround highGround, Location jumpLocation, String direction){
+        this.highGround = highGround;
+        this.jumpLocation = jumpLocation;
+        this.direction = direction;
     }
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        Weapon weapon = actor.getWeapon();
-        Ground jumpLocation = location.getGround();
-        return null;
+        if (Math.random() < highGround.getSuccessRate()){
+            map.moveActor(actor, jumpLocation);
+            return "Woohoo! " + actor + " jumps successfully.";
+        }else {
+            actor.hurt(highGround.damage());
+            return "Oh no!" + actor + " failed to make the jump.";
+        }
     }
 
     @Override
     public String menuDescription(Actor actor) {
 
-        return actor + " can jump " + ground;
+        return actor + " can jump " + highGround + " at " + direction;
     }
 }
