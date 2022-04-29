@@ -16,6 +16,9 @@ import game.statuses.Status;
 
 import java.util.ArrayList;
 
+/**
+ * Class representing Toad
+ */
 public class Toad extends NPC {
 
     private ArrayList<Purchasable> buyables = new ArrayList<>();
@@ -36,11 +39,17 @@ public class Toad extends NPC {
         // manually add all buyable items into buyableItems
     }
 
+    /**
+     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         return new DoNothingAction();
     }
 
+    /**
+     * @see Actor#allowableActions(Actor, String, GameMap)
+     */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         for (Purchasable item : buyables) {
@@ -51,6 +60,11 @@ public class Toad extends NPC {
             return actions;
     }
 
+    /**
+     * Returns a list of strings that Toad can say to otherActor
+     * @param otherActor Actor that toad is talking to
+     * @return the list of dialogue options
+     */
     public ArrayList<String> getDialogue(Actor otherActor){
         ArrayList<String> dialogues = new ArrayList<>();
 
