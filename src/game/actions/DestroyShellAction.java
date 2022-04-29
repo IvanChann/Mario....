@@ -13,7 +13,7 @@ public class DestroyShellAction extends Action {
     }
     @Override
     public String execute(Actor actor, GameMap map) {
-        map.locationOf(target).addItem(new SuperMushroom(true));
+        map.locationOf(target).addItem(new SuperMushroom());
         map.removeActor(target);
         return actor + " smashes " + target + "'s shell";
     }

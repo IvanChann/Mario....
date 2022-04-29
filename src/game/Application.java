@@ -62,9 +62,9 @@ public class Application {
 			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));
 			gameMap.at(0, 0).addActor(new Goomba());
 			gameMap.at(1, 0).addActor(new Koopa());
-			gameMap.at(42, 9).addItem(new PowerStar(true));
+			gameMap.at(42, 9).addItem(new PowerStar());
 
-			gameMap.at(42, 11).addItem(new SuperMushroom(true));
+			gameMap.at(42, 11).addItem(new SuperMushroom());
 			gameMap.at(42, 12).addItem(new Coin(69));
 			gameMap.at(42, 13).addItem(new Coin(69));
 

@@ -20,11 +20,10 @@ public class PowerStar extends Item implements Consumable, Purchasable{
 
     /***
      * Constructor.
-     * @param portable true if and only if the Item can be picked up
      */
-    public PowerStar(boolean portable) {
+    public PowerStar() {
 
-        super("Power Star", '*', portable);
+        super("Power Star", '*', true);
 
 
     }
@@ -66,6 +65,7 @@ public class PowerStar extends Item implements Consumable, Purchasable{
 
     @Override
     public void purchasedBy(Actor actor) {
+        this.togglePortability();
         actor.addItemToInventory(this);
     }
 

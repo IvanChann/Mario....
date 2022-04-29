@@ -29,8 +29,8 @@ public class Toad extends NPC {
      */
     public Toad(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        buyables.add(new PowerStar(false));
-        buyables.add(new SuperMushroom(false));
+        buyables.add(new PowerStar());
+        buyables.add(new SuperMushroom());
         buyables.add(new Wrench());
 
         // manually add all buyable items into buyableItems
