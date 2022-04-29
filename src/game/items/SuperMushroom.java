@@ -15,11 +15,10 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
 
     /***
      * Constructor.
-     * @param portable true if and only if the Item can be picked up
      */
-    public SuperMushroom(boolean portable) {
+    public SuperMushroom() {
 
-        super("Super Mushroom", '^', portable);
+        super("Super Mushroom", '^', true);
     }
 
 
@@ -42,6 +41,7 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
 
     @Override
     public void purchasedBy(Actor actor) {
+        this.togglePortability();
         actor.addItemToInventory(this);
     }
 

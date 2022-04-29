@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.JumpAction;
+import game.items.Coin;
 import game.statuses.Status;
 
 import java.util.List;
@@ -29,20 +29,19 @@ public abstract class HighGround extends Ground {
         this.addCapability(Status.JUMP);
     }
 
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        if (actor.hasCapability(Status.GLOWING)){
+            return true;
+        }
+        return false;
+    }
 
-    /**
-     * The amount of damage the ground will inflict on an unsuccessful jump
-     *
-     * @return the damage, in hitpoints
-     */
-
-    public abstract int damage(int damage);
-
-    /**
-     * The success rate for each jump for this ground
-     *
-     * @return the success rate, in %/100
-     */
-    public abstract double successRate(double successRate);
-
+    @Override
+    public void tick(Location location) {
+        if (location.containsAnActor() && location.getActor().hasCapability(Status.GLOWING)){
+            location.setGround(new Dirt());
+            location.addItem(new Coin(5));
+        }
+    }
 }

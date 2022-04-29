@@ -49,7 +49,7 @@ public class ResetManager{
     public void run(GameMap map){
         List<Resettable> toClean = new ArrayList<>();
         for (Resettable reset: resettableList){
-            if (reset.resetInstance(map)){
+            if (reset.resetInstance()){
                 toClean.add(reset);
             }
         }

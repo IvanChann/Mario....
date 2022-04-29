@@ -10,7 +10,5 @@ public enum Status {
     GLOWING, // effect from consuming Power Star
     CAN_DESTROY_SHELL,
     CANNOT_ENTER_FLOOR,
-    FERTILE, // use this to check if the ground is fertile(which is dirt).
-    JUMP, // use this status to check if the actor needs to jump.
-    CAN_RESET,
+    CAN_RESET
 }

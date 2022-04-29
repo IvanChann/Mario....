@@ -13,10 +13,12 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.reset.Resettable;
 import game.statuses.Status;
 
-public class Koopa extends Enemy {
+public class Koopa extends Enemy implements Resettable {
     private boolean dormant = false;
+    private boolean remove = false;
 
     /**
      * Constructor.
@@ -27,6 +29,7 @@ public class Koopa extends Enemy {
         super("Koopa", 'K', 100);
         this.addBehaviour(WanderBehaviour.PRIORITY, new WanderBehaviour());
         this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
+        this.registerInstance();
     }
 
     @Override
@@ -61,6 +64,10 @@ public class Koopa extends Enemy {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (remove) {
+            map.removeActor(this);
+            return new DoNothingAction();
+        }
         if (dormant){
             return new DoNothingAction();
         }
@@ -71,6 +78,11 @@ public class Koopa extends Enemy {
             }
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public boolean resetInstance() {
+        return remove = true;
     }
 }
 

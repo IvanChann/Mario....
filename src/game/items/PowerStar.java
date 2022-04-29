@@ -20,17 +20,20 @@ public class PowerStar extends Item implements Consumable, Purchasable{
 
     /***
      * Constructor.
-     * @param portable true if and only if the Item can be picked up
      */
-    public PowerStar(boolean portable) {
+    public PowerStar() {
 
-        super("Power Star", '*', portable);
+        super("Power Star", '*', true);
 
 
     }
 
     @Override
     public void tick(Location currentLocation, Actor actor) {
+        if (consumed && !actor.hasCapability(Status.GLOWING)){
+            actor.removeItemFromInventory(this);
+            return;
+        }
         this.timer -= 1;
         System.out.println(timer + " turns of power star remaining");
         if (this.timer == 0){
@@ -51,15 +54,18 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     public void consumedBy(Actor actor, GameMap map) {
         if (map.locationOf(actor).getItems().contains(this)) {
             map.locationOf(actor).removeItem(this);
+            actor.addItemToInventory(this);
         }
+        this.togglePortability();
         this.consumed = true;
         actor.heal(200);
-        this.addCapability(Status.GLOWING);
+        actor.addCapability(Status.GLOWING);
         this.timer = 10;
     }
 
     @Override
     public void purchasedBy(Actor actor) {
+        this.togglePortability();
         actor.addItemToInventory(this);
     }
 
