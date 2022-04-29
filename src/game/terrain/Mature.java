@@ -1,22 +1,23 @@
 package game.terrain;
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
+import game.actions.JumpAction;
 import game.actors.Koopa;
 import game.actors.Player;
 import game.statuses.Status;
 
 
-public class Mature extends Ground implements HighGround{
+public class Mature extends HighGround{
     public int age;
     Exit exit;
 
     public Mature() {
-        super('T');
+        super('T', 30, 0.7);
         age = 0;
-        this.addCapability(Status.JUMP);
     }
 
 
@@ -42,9 +43,9 @@ public class Mature extends Ground implements HighGround{
      * @return the damage
      */
     @Override
-    public int damage() {
-        return 30;
-    }
+    public int damage(int damage){
+        return damage;
+    };
 
     /**
      * Accessor for success rate for each jump for this ground.
@@ -52,9 +53,11 @@ public class Mature extends Ground implements HighGround{
      * @return the success rate.
      */
     @Override
-    public double successRate() {
-        return 0.7;
+    public double successRate(double successRate) {
+        return successRate;
     }
+
+
 }
 
 
