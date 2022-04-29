@@ -13,7 +13,9 @@ because only the player of the game will need access to the wallet. This also al
 since it also allows other actors to collect coins FOR the player, such as coin collectors, which wouldn't be possible if we
 used a wallet attribute for specific actors which requires downcasting.
 
-Added PickupCoinAction that handles picking up coins that instantly add credits to WalletManager
+Added PickupCoinAction that extends PickUpItemAction and handles picking up coins that instantly add credits to WalletManager
+Reason for extending PickUpItemAction is that the engine already has the functionalities to support picking up items (getPickupAction)
+Overrode getPickUpAction in the Coin class to return a new PickUpCoinAction instead
 
 PickupCoinAction has an association with the Coin class since it needs to be kept as an attribute to remove it from the map 
 as well as show the appropriate message in menu.
