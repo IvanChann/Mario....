@@ -6,13 +6,12 @@ import game.statuses.Status;
 import game.items.Coin;
 
 
-public class Sapling extends Ground implements HighGround {
+public class Sapling extends HighGround {
     private int age;
 
     public Sapling(){
-        super('t');
+        super('t', 20, 0.8);
         age = 0;
-        this.addCapability(Status.JUMP);
     }
 
     @Override
@@ -33,9 +32,9 @@ public class Sapling extends Ground implements HighGround {
      * @return the damage
      */
     @Override
-    public int damage() {
-        return 20;
-    }
+    public int damage(int damage){
+        return damage;
+    };
 
     /**
      * Accessor for success rate for each jump for this ground.
@@ -43,8 +42,8 @@ public class Sapling extends Ground implements HighGround {
      * @return the success rate.
      */
     @Override
-    public double successRate() {
-        return 0.8;
+    public double successRate(double successRate) {
+        return successRate;
     }
 
 }

@@ -6,11 +6,10 @@ import game.statuses.Status;
 
 
 
-public class Wall extends Ground implements HighGround{
+public class Wall extends HighGround{
 
 	public Wall() {
-		super('#');
-		this.addCapability(Status.JUMP);
+		super('#', 20, 0.8);
 	}
 
 	@Override
@@ -29,16 +28,17 @@ public class Wall extends Ground implements HighGround{
 	 * @return the damage
 	 */
 	@Override
-	public int damage() {
-		return 20;
-	}
+	public int damage(int damage){
+		return damage;
+	};
+
 	/**
 	 * Accessor for success rate for each jump for this ground.
 	 *
 	 * @return the success rate.
 	 */
 	@Override
-	public double successRate() {
-		return 0.8;
+	public double successRate(double successRate) {
+		return successRate;
 	}
 }

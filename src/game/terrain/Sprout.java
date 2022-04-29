@@ -5,14 +5,13 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.statuses.Status;
 
-public class Sprout extends Ground implements HighGround{
+public class Sprout extends HighGround{
     private int age;
     public Location location;
 
     public Sprout() {
-        super('+');
+        super('+', 10, 0.9);
         age = 0;
-        this.addCapability(Status.JUMP);
     }
 
     @Override
@@ -34,9 +33,9 @@ public class Sprout extends Ground implements HighGround{
      * @return the damage
      */
     @Override
-    public int damage() {
-        return 10;
-    }
+    public int damage(int damage){
+        return damage;
+    };
 
     /**
      * Accessor for success rate for each jump for this ground.
@@ -44,7 +43,7 @@ public class Sprout extends Ground implements HighGround{
      * @return the success rate.
      */
     @Override
-    public double successRate() {
-        return 0.9;
+    public double successRate(double successRate) {
+        return successRate;
     }
 }
