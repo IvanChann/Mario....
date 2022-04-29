@@ -1,4 +1,6 @@
 package game.terrain;
+import edu.monash.fit2099.engine.actions.ActionList;
+import game.actions.JumpAction;
 import game.actors.Goomba;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
@@ -39,6 +41,16 @@ public class Sprout extends HighGround implements Resettable {
     @Override
     public boolean resetInstance() {
         return remove = random.nextBoolean();
+    }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        return new ActionList(new JumpAction((HighGround) location.getGround(), location, direction));
+    }
+
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return false;
     }
 }
 

@@ -55,9 +55,19 @@ public class Mature extends HighGround implements Resettable {
 
             Location randomFertile = fertileGround.get(random.nextInt(fertileGround.size()));
             randomFertile.setGround(new Sprout());
-
         }
     }
+
+    @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        return new ActionList(new JumpAction((HighGround) location.getGround(), location, direction));
+    }
+
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return false;
+    }
+
     @Override
     public boolean resetInstance() {
         return remove = random.nextBoolean();
