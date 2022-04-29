@@ -1,6 +1,5 @@
 package game.terrain;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.actors.Actor;
+
 
 /**
  * Base class for all high ground's

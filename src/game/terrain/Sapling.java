@@ -2,7 +2,8 @@ package game.terrain;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.enums.Status;
+import game.statuses.Status;
+import game.items.Coin;
 
 
 public class Sapling extends Ground implements HighGround {
@@ -22,7 +23,7 @@ public class Sapling extends Ground implements HighGround {
                 location.setGround(new Mature());
             }
             if (Math.random() < 0.1) {
-                location.addItem(new Coin());
+                location.addItem(new Coin(20));
             }
         }
     }

@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import game.actors.Koopa;
 import game.actors.Player;
-import game.enums.Status;
+import game.statuses.Status;
 
 
 public class Mature extends Ground implements HighGround{

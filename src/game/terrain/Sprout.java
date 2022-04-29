@@ -3,7 +3,7 @@ import game.actors.Goomba;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.enums.Status;
+import game.statuses.Status;
 
 public class Sprout extends Ground implements HighGround{
     private int age;
