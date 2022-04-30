@@ -1,23 +1,19 @@
 package game.terrain;
 
 
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Coin;
 import game.statuses.Status;
 
-import java.util.List;
 
 /**
  * Base class for all high ground's
  */
 public abstract class HighGround extends Ground {
-    HighGround highGround;
-    private int damage;
-    private double successRate;
+    private final int damage;
+    private final double successRate;
 
 
     /**
@@ -34,10 +30,7 @@ public abstract class HighGround extends Ground {
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        if (actor.hasCapability(Status.GLOWING)){
-            return true;
-        }
-        return false;
+        return actor.hasCapability(Status.GLOWING);
     }
 
     public double getSuccessRate(){
@@ -45,7 +38,7 @@ public abstract class HighGround extends Ground {
     }
     public int damage(){
         return damage;
-    };
+    }
 
     @Override
     public void tick(Location location) {
