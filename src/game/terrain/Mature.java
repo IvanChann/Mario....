@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 
 public class Mature extends Tree implements Resettable {
+    public static final int FALL_DAMAGE = 30;
+    public static final double SUCCESS_RATE = 0.7;
     public Mature() {
-        super('T', 30, 0.7, 0);
+        super('T', Mature.FALL_DAMAGE, Mature.SUCCESS_RATE, 0);
     }
 
 
