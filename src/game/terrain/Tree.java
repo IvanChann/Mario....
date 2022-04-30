@@ -1,9 +1,6 @@
 package game.terrain;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.JumpAction;
 import game.reset.Resettable;
 
 import java.util.Random;
@@ -24,6 +21,7 @@ public abstract class Tree extends HighGround implements Resettable {
         if (remove) {
             location.setGround(new Dirt());
         }
+        super.tick(location);
     }
 
     @Override
@@ -31,8 +29,4 @@ public abstract class Tree extends HighGround implements Resettable {
         return remove = random.nextBoolean();
     }
 
-    @Override
-    public boolean canActorEnter(Actor actor) {
-        return false;
-    }
 }
