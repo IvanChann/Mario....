@@ -12,6 +12,7 @@ import game.statuses.Status;
 public class ResetAction extends Action {
 
     /**
+     * Uses ResetManager to reset the game
      * @see Action#execute(Actor, GameMap) 
      */
     @Override

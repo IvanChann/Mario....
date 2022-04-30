@@ -11,3 +11,16 @@ This implementation will only need to add one extra class. As ResetAction extend
 implement this class other than adding a few things to the Player class and dependencies are kept to a minimum
 clearly showing adherence to the Open-Closed Principle and Dependency Inversion Principle.
 Implementing the actual "reset" is made easier as there are many helpful methods in Location and Actor that can be utilized.
+
+EDIT 30/04/22
+
+Now implemented using Resettable interface and ResetManager
+This allows for an easy way for the game to keep track of what objects need to be reset and also reduces the amount of
+code that is repeated.
+Any class that needs to be reset can simply implement the Resettable interface and its resetInstance() method to reset
+according to the class's needs.
+
+For objects that need to be removed, that is Coin, Tree, Goomba and Koopa, a boolean attribute "remove" is added.
+Then in the tick or playTurn methods it can be removed from the game based on whether remove is true or false.
+This amount of dependencies is kept to a minimum adhering to the Dependency Inversion Principle and future objects
+that need to be reset can easily be implemented adhering to the Open-Closed Principle.
