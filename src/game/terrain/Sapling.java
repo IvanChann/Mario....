@@ -12,13 +12,11 @@ public class Sapling extends Tree implements Resettable {
     @Override
     public void tick(Location location) {
         age++;
-        if (getDisplayChar() != '$') {
-            if (age == 10) {
-                location.setGround(new Mature());
-            }
-            if (Math.random() < 0.1) {
-                location.addItem(new Coin(20));
-            }
+        if (age == 10) {
+            location.setGround(new Mature());
+        }
+        else if (Math.random() < 0.1) {
+            location.addItem(new Coin(20));
         }
         super.tick(location);
     }
