@@ -32,11 +32,6 @@ public abstract class Tree extends HighGround implements Resettable {
     }
 
     @Override
-    public ActionList allowableActions(Actor actor, Location location, String direction) {
-        return new ActionList(new JumpAction((HighGround) location.getGround(), location, direction));
-    }
-
-    @Override
     public boolean canActorEnter(Actor actor) {
         return false;
     }

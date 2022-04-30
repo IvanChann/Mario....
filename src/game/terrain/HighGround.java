@@ -1,9 +1,11 @@
 package game.terrain;
 
 
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actions.JumpAction;
 import game.items.Coin;
 import game.statuses.Status;
 
@@ -29,6 +31,15 @@ public abstract class HighGround extends Ground {
     }
 
     @Override
+    public ActionList allowableActions(Actor actor, Location location, String direction) {
+        ActionList actions = new ActionList();
+        if (!location.containsAnActor()){
+            actions.add(new JumpAction(this, location, direction));
+        }
+        return actions;
+    }
+
+    @Override
     public boolean canActorEnter(Actor actor) {
         return actor.hasCapability(Status.GLOWING);
     }
@@ -36,6 +47,7 @@ public abstract class HighGround extends Ground {
     public double getSuccessRate(){
         return successRate;
     }
+
     public int damage(){
         return damage;
     }
