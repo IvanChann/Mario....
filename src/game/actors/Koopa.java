@@ -71,7 +71,7 @@ public class Koopa extends Enemy implements Resettable {
         if (dormant){
             return new DoNothingAction();
         }
-        for (Behaviour behaviour : this.getBehaviours().values()) {
+        for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null) {
                 return action;

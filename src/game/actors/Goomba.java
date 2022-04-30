@@ -69,7 +69,7 @@ public class Goomba extends Enemy	 implements Resettable {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
-		for (Behaviour behaviour : this.getBehaviours().values()) {
+		for (Behaviour behaviour : behaviours.values()) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null) {
 				return action;
