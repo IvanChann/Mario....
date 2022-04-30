@@ -6,12 +6,10 @@ import game.actors.Koopa;
 import game.reset.Resettable;
 import game.statuses.Status;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 
 public class Mature extends Tree implements Resettable {
-    private final Random random = new Random();
-
     public Mature() {
         super('T', 30, 0.7, 0);
     }
