@@ -28,7 +28,7 @@ public class Sprout extends HighGround implements Resettable {
             return;
         }
         age++;
-        if (getDisplayChar() != 'g') {
+        if (!location.containsAnActor()) {
             if (age == 10) {
                 location.setGround(new Sapling());
             }
