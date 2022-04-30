@@ -13,15 +13,8 @@ import java.util.TreeMap;
 
 public abstract class NPC extends Actor {
 
-    private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
+    protected Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
-    public Map<Integer, Behaviour> getBehaviours() {
-        return Collections.unmodifiableMap(behaviours);
-    }
-
-    public void addBehaviour(Integer priority, Behaviour behaviour){
-        behaviours.put(priority, behaviour);    // FOLLOWS DEFENSIVE COPYING SAME AS ABOVE
-    }
     /**
      * Constructor.
      *

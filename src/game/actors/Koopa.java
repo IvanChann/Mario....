@@ -27,8 +27,8 @@ public class Koopa extends Enemy implements Resettable {
     public Koopa() {
 
         super("Koopa", 'K', 100);
-        this.addBehaviour(WanderBehaviour.PRIORITY, new WanderBehaviour());
-        this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
+        behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
+        behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
         this.registerInstance();
     }
 
@@ -42,7 +42,7 @@ public class Koopa extends Enemy implements Resettable {
         if (!dormant) {
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 actions.add(new AttackAction(this, direction));
-                this.addBehaviour(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
+                behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
             }
         } else{
             if (otherActor.hasCapability(Status.CAN_DESTROY_SHELL)){

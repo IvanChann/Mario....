@@ -19,6 +19,7 @@ import game.behaviours.Behaviour;
  * A little fungus guy.
  */
 public class Goomba extends Enemy	 implements Resettable {
+	public static final double SUICIDE_CHANCE = 0.1;
 	private boolean remove = false;
 	/**
 	 * Constructor.
@@ -26,8 +27,8 @@ public class Goomba extends Enemy	 implements Resettable {
 	public Goomba() {
 		super("Goomba", 'g', 20);
 		registerInstance();
-		this.addBehaviour(WanderBehaviour.PRIORITY, new WanderBehaviour());
-		this.addBehaviour(AttackBehaviour.PRIORITY, new AttackBehaviour());
+		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
+		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
 
 
 
@@ -49,7 +50,7 @@ public class Goomba extends Enemy	 implements Resettable {
 		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new AttackAction(this, direction));
 		}
-		this.addBehaviour(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
+		behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
 		return actions;
 	}
 
@@ -64,7 +65,7 @@ public class Goomba extends Enemy	 implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		if (Math.random() <= 0.1 || this.remove) {
+		if (Math.random() <= Goomba.SUICIDE_CHANCE || this.remove) {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
