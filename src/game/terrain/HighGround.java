@@ -11,7 +11,7 @@ import game.statuses.Status;
 
 
 /**
- * Base class for all high ground's
+ * Base class for all high grounds
  */
 public abstract class HighGround extends Ground {
     private final int damage;
@@ -33,7 +33,7 @@ public abstract class HighGround extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (!location.containsAnActor() && !actor.hasCapability(Status.GLOWING)){
+        if (!actor.hasCapability(Status.GLOWING)){
             actions.add(new JumpAction(this, location, direction));
         }
         return actions;
