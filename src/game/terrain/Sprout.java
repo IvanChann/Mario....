@@ -12,13 +12,11 @@ public class Sprout extends Tree implements Resettable {
     @Override
     public void tick(Location location) {
         age++;
-        if (!location.containsAnActor()) {
-            if (age == 10) {
-                location.setGround(new Sapling());
-            }
-            if (getDisplayChar() == '+' && Math.random() < 0.1) {
-                location.addActor(new Goomba());
-            }
+        if (age == 10) {
+            location.setGround(new Sapling());
+        }
+        else if (!location.containsAnActor() && Math.random() < 0.1) {
+            location.addActor(new Goomba());
         }
         super.tick(location);
     }
