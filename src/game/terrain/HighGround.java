@@ -52,6 +52,11 @@ public abstract class HighGround extends Ground {
         return damage;
     }
 
+    /**
+     * Converts current ground to Dirt and adds a coin to the current location if a player is under the
+     * effects of Power Star
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (location.containsAnActor() && location.getActor().hasCapability(Status.GLOWING)){
