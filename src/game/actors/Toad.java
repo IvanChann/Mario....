@@ -24,7 +24,7 @@ public class Toad extends NPC {
     private ArrayList<Purchasable> buyables = new ArrayList<>();
 
     /**
-     * Constructor.
+     * Constructor. Adds the items that Toad will sell to his list of Purchasable items
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
@@ -36,10 +36,10 @@ public class Toad extends NPC {
         buyables.add(new SuperMushroom());
         buyables.add(new Wrench());
 
-        // manually add all buyable items into buyableItems
     }
 
     /**
+     * Toad just stands still every turn and does nothing
      * @see Actor#playTurn(ActionList, Action, GameMap, Display)
      */
     @Override
@@ -48,6 +48,7 @@ public class Toad extends NPC {
     }
 
     /**
+     * Generates buy actions for each item in his shop, also allows player to speak with him
      * @see Actor#allowableActions(Actor, String, GameMap)
      */
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {

@@ -56,7 +56,7 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map);
 			world.addGameMap(gameMap);
 
-			Actor mario = new Player("Player", 'm', 100);
+			Actor mario = new Player("Mario", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));

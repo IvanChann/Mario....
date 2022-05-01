@@ -34,12 +34,21 @@ public class AttackAction extends Action {
 	 * Constructor.
 	 * 
 	 * @param target the Actor to attack
+	 * @param direction the direction of the target
 	 */
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * Method used by the engine to perform the attack. First calculates the damage,
+	 * then applies the damage. Then checks if the target 'is conscious' or not, if unconscious,
+	 * the target will drop all their items, and they will be removed from the game.
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return a string representing the action taken
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 
@@ -78,6 +87,11 @@ public class AttackAction extends Action {
 		return result;
 	}
 
+	/**
+	 * Method that displays the option of attacking a target in some specific direction on the menu
+	 * @param actor The actor performing the action.
+	 * @return String representing the attack action that can be taken
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target + " at " + direction;

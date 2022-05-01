@@ -8,14 +8,14 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.PickupCoinAction;
 import game.reset.Resettable;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Class representing a coin of arbitrary value
+ */
 public class Coin extends Item implements Resettable {
     private boolean remove = false;
     private Integer value;
     /***
-     * Constructor.
+     * Constructor. Stores the value of the coin
      *  @param value The value of the coin
      */
     public Coin(Integer value) {

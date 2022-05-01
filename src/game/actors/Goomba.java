@@ -16,13 +16,14 @@ import game.behaviours.WanderBehaviour;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 /**
- * A little fungus guy.
+ * Class representing the Goomba enemy
+ * @author Andy Ouyang
  */
 public class Goomba extends Enemy	 implements Resettable {
 	public static final double SUICIDE_CHANCE = 0.1;
 	private boolean remove = false;
 	/**
-	 * Constructor.
+	 * Constructor. Allows the Goomba to wander around and attack a player on sight
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
@@ -36,8 +37,10 @@ public class Goomba extends Enemy	 implements Resettable {
 	}
 
 	/**
-	 * At the moment, we only make it can be attacked by Player.
-	 * You can do something else with this method.
+	 * Method that returns a list of actions that can be performed by another actor
+	 * to this Goomba
+	 *
+	 * If a player is spotted, Goomba will begin following the player
 	 *
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
@@ -56,14 +59,20 @@ public class Goomba extends Enemy	 implements Resettable {
 		return actions;
 	}
 
+
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(10, "obliterates");
 	}
 
 	/**
-	 * Figure out what to do next.
-	 * @see Actor#playTurn(ActionList, Action, GameMap, Display)
+	 * First checks if Goomba will commit suicide or not, if not then goes through
+	 * the behaviours TreeMap to figure out what action to take
+	 * @param actions    collection of possible Actions for this Actor
+	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param map        the map containing the Actor
+	 * @param display    the I/O object to which messages may be written
+	 * @return
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

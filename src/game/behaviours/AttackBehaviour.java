@@ -12,6 +12,12 @@ public class AttackBehaviour implements Behaviour {
 
     public static final Integer PRIORITY = 10;
 
+    /**
+     * Scans if there is a hostile actor nearby, if there is, then prepares to attack
+     * @param actor the Actor acting
+     * @param map the GameMap containing the Actor
+     * @return an action to attack the other actor
+     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
 

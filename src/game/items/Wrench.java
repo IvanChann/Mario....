@@ -1,13 +1,16 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.statuses.Status;
 
+/**
+ * Class representing the Wrench item
+ * @author Andy Ouyang
+ */
 public class Wrench extends WeaponItem implements Purchasable{
     /***
-     * Constructor.
+     * Constructor. Wrench has the ability to destroy Koopa shells
      */
     public Wrench() {
 
@@ -15,6 +18,10 @@ public class Wrench extends WeaponItem implements Purchasable{
         this.addCapability(Status.CAN_DESTROY_SHELL);
     }
 
+    /**
+     * Adds the item to the player's inventory
+     * @param actor Actor who bought the item
+     */
     @Override
     public void purchasedBy(Actor actor) {
         actor.addItemToInventory(this);
