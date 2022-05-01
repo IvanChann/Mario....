@@ -26,6 +26,8 @@ public class Goomba extends Enemy	 implements Resettable {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
+		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
+		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
 		registerInstance();
 
 

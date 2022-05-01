@@ -26,8 +26,7 @@ public abstract class Enemy extends NPC {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.CANNOT_ENTER_FLOOR);
-        behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
-        behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
+
     }
 
 
