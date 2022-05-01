@@ -15,6 +15,7 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     private int timer = 10;
     private int price = 600;
     private boolean consumed = false;
+    public static final int HEALING = 200;
 
     //private Actor actor;
 
@@ -58,7 +59,7 @@ public class PowerStar extends Item implements Consumable, Purchasable{
         }
         this.togglePortability();
         this.consumed = true;
-        actor.heal(200);
+        actor.heal(PowerStar.HEALING);
         actor.addCapability(Status.GLOWING);
         this.timer = 10;
     }

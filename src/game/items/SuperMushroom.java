@@ -12,6 +12,7 @@ import java.util.List;
 
 public class SuperMushroom extends Item implements Consumable, Purchasable{
     private int price = 400;
+    public static final int HP_INCREASE = 50;
 
     /***
      * Constructor.
@@ -27,7 +28,7 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
         if (map.locationOf(actor).getItems().contains(this)) {
             map.locationOf(actor).removeItem(this);
         }
-        actor.increaseMaxHp(50);
+        actor.increaseMaxHp(SuperMushroom.HP_INCREASE);
         actor.addCapability(Status.TALL);
         // IMPLEMENT 100% JUMP HERE
         actor.removeItemFromInventory(this);
