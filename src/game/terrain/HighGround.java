@@ -33,7 +33,7 @@ public abstract class HighGround extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (!actor.hasCapability(Status.GLOWING)){
+        if (!actor.hasCapability(Status.GLOWING) && !location.containsAnActor()){
             actions.add(new JumpAction(this, location, direction));
         }
         return actions;
