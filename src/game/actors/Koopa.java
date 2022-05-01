@@ -27,8 +27,6 @@ public class Koopa extends Enemy implements Resettable {
     public Koopa() {
 
         super("Koopa", 'K', 100);
-        behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
-        behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
         this.registerInstance();
     }
 

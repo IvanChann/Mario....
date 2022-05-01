@@ -27,8 +27,7 @@ public class Goomba extends Enemy	 implements Resettable {
 	public Goomba() {
 		super("Goomba", 'g', 20);
 		registerInstance();
-		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
-		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
+
 
 
 
@@ -49,8 +48,9 @@ public class Goomba extends Enemy	 implements Resettable {
 		ActionList actions = new ActionList();
 		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new AttackAction(this, direction));
+			behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
 		}
-		behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
+
 		return actions;
 	}
 

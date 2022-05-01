@@ -5,7 +5,9 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 import game.statuses.Status;
 
 import java.util.HashMap;
@@ -24,6 +26,8 @@ public abstract class Enemy extends NPC {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.CANNOT_ENTER_FLOOR);
+        behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
+        behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
     }
 
 

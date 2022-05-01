@@ -30,7 +30,6 @@ public class SuperMushroom extends Item implements Consumable, Purchasable{
         }
         actor.increaseMaxHp(SuperMushroom.HP_INCREASE);
         actor.addCapability(Status.TALL);
-        // IMPLEMENT 100% JUMP HERE
         actor.removeItemFromInventory(this);
 
     }
