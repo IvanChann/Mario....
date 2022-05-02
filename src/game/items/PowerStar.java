@@ -49,10 +49,11 @@ public class PowerStar extends Item implements Consumable, Purchasable{
     @Override
     public void tick(Location currentLocation, Actor actor) {
         this.timer -= 1;
-        System.out.println(timer + " turns of power star remaining");
-        if (this.timer == 0){
+        if (this.timer == 0 || actor.hasCapability(Status.REMOVE_STAR)){
+            actor.removeCapability(Status.REMOVE_STAR);
             actor.removeItemFromInventory(this);
         }
+        System.out.println(timer + " turns of power star remaining");
     }
 
     /**

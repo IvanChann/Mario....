@@ -71,14 +71,23 @@ public class Player extends Actor implements Resettable {
 		}
 	}
 
+	/**
+	 * @see Actor#getDisplayChar()
+	 */
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
+	/**
+	 * @see Resettable#resetInstance()
+	 */
 	@Override
 	public boolean resetInstance() {
-		this.removeCapability(Status.GLOWING);
+		if (this.hasCapability(Status.GLOWING)){
+			this.addCapability(Status.REMOVE_STAR);
+		}
+
 		this.resetMaxHp(initialHitPoints);
 		this.removeCapability(Status.TALL);
 

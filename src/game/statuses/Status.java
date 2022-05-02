@@ -12,4 +12,5 @@ public enum Status {
     CANNOT_ENTER_FLOOR, // status that prevents an actor from entering floors
     CAN_RESET, // status allowing the player to reset the game
     FERTILE, // status applied to ground that marks them as fertile
+    REMOVE_STAR, // status for the PowerStar class to know if the player reset their status
 }
