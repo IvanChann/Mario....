@@ -9,6 +9,10 @@ import game.statuses.Status;
  */
 public class Dirt extends Ground {
 
+	/**
+	 * Constructor
+	 * @see Ground#Ground(char)
+	 */
 	public Dirt() {
 		super('.');
 		this.addCapability(Status.FERTILE);
