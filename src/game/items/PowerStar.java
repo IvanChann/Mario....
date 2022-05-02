@@ -42,7 +42,8 @@ public class PowerStar extends Item implements Consumable, Purchasable{
 
     }
     /**
-     * Ticks down timer each turn, removes from inventory at 0
+     * Ticks down timer each turn, removes from inventory at 0. Or if player has an 'active' power star,
+     * then remove it from the inventory upon reset
      * @param currentLocation The location of the actor carrying this Item.
      * @param actor The actor carrying this Item.
      */
