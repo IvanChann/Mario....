@@ -9,10 +9,17 @@ import game.statuses.Status;
  */
 public class Floor extends Ground {
 
+	/**
+	  @see Ground#Ground(char)  Ground
+	 */
 	public Floor() {
 		super('_');
 	}
 
+	/**
+	 * Enemies cannot walk on Floor
+	 * @see Ground#canActorEnter(Actor)
+	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		return !actor.hasCapability(Status.CANNOT_ENTER_FLOOR);
