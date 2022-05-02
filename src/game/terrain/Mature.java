@@ -8,15 +8,33 @@ import game.statuses.Status;
 import java.util.ArrayList;
 
 
-
+/**
+ * Class representing a Mature Tree
+ */
 public class Mature extends Tree implements Resettable {
+    /**
+     * Damage from failed jump
+     */
     public static final int FALL_DAMAGE = 30;
+
+    /**
+     * Chance of success for jump
+     */
     public static final double SUCCESS_RATE = 0.7;
+
+    /**
+     * Constructor
+     * @see Tree#Tree(char, int, double, int)  Tree
+     */
     public Mature() {
         super('T', Mature.FALL_DAMAGE, Mature.SUCCESS_RATE, 0);
     }
 
-
+    /**
+     * Spawn Koopa and Sprout or wilts based on conditions
+     * @see Tree#tick(Location)
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         age++;
