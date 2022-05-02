@@ -22,5 +22,14 @@ Dependency between JumpAction and Status as we need to use this to debuff player
 success rates for each jump.
 
 
+EDIT FOR ASSIGNMENT 2
+
+Modification from previous diagram.
+Assocaiation between Player and JumpAction, and a player can use JumpAction to jump once each turn.
+Hence the 1 by 1 multiplicity.
+
+HighGround has a dependency with ActionList as with each ground we have JumpAction as an allowable action
+which gets added to the ActionList and is accessed by the Player to find out what actions can be
+performed.
 
 
