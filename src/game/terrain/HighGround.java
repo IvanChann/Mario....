@@ -14,15 +14,23 @@ import game.statuses.Status;
  * Base class for all high grounds
  */
 public abstract class HighGround extends Ground {
+    /**
+     * Damage taken when failing jump
+     */
     private final int damage;
+
+    /**
+     * Success Rate of jump
+     */
     private final double successRate;
 
 
     /**
      * Constructor for High Ground's
-     * @param displayChar
-     * @param damage
-     * @param successRate
+     * @param displayChar Display character
+     * @param damage Damage taken when failed jump
+     * @param successRate Rate of success of jump
+     * @see Ground#Ground(char)
      */
     public HighGround(char displayChar, int damage, double successRate){
         super(displayChar);
@@ -30,6 +38,14 @@ public abstract class HighGround extends Ground {
         this.successRate = successRate;
     }
 
+    /**
+     * Adds the jump action for adjacent actors
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return an ActionList
+     * @see Ground#allowableActions(Actor, Location, String)
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
@@ -39,15 +55,28 @@ public abstract class HighGround extends Ground {
         return actions;
     }
 
+    /**
+     * If the actor has PowerStar Active they can walk on HighGround
+     * @param actor the Actor to check
+     * @return if the actor can enter or not
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return actor.hasCapability(Status.GLOWING);
     }
 
+    /**
+     *
+     * @return successRate
+     */
     public double getSuccessRate(){
         return successRate;
     }
 
+    /**
+     *
+     * @return damage
+     */
     public int damage(){
         return damage;
     }
