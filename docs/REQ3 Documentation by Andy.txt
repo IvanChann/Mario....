@@ -16,6 +16,8 @@ All future enemy classes added can extend this class
 
 Added Goomba and Koopa class extending Enemy to diagram
 
+Made WanderBehaviour no longer extend Action since it violates SRP trying to handle both Action and Behaviour at simultaneously
+
 Added AttackBehaviour that implements Behaviour, will scan the actor's surroundings
 if it finds an actor with HOSTILE_TO_ENEMY it will return an AttackAction
 
