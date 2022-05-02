@@ -21,6 +21,9 @@ import java.util.ArrayList;
  */
 public class Toad extends NPC {
 
+    /**
+     * List of buyable items
+     */
     private ArrayList<Purchasable> buyables = new ArrayList<>();
 
     /**
