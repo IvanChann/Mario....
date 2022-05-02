@@ -18,3 +18,19 @@ for Trees.
 
 Every turn we have different options possible for each Tree. Which are implemented using the CapabalitySet.
 
+EDIT FOR ASSIGNMENT 2
+
+Modifed and added an abstract Tree class and added all the trees inherit that abstarct class. To make 
+resetting the game easier.
+All the trees and high ground inherit the HighGround abstract class to make expanding the game easy.
+Following the Open/Closed Principle, so its open for extension but closed for modification.
+
+And everything else inherits the Ground Absract class.
+
+Added an association with multiplicty 1* between Sprout and Goomba as multiple sprouts have chnaces of 
+spawning goomba every turn.
+Added an association with multiplicty 1* between Sapling and Coin as multiple saplings have chances of 
+dropping coins every turn.
+Added an association with multiplicty 1* between Mature and Koopa as multiple Mature trees have chances of 
+spawning Koopa every turn.
+
