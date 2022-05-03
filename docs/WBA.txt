@@ -17,3 +17,10 @@ WBA 2 Accepting:
 Andy: I accept this WBA
 Anant: I accept this WBA
 Ivan: I accept this WBA
+
+ASSIGNMENT 3
+Andy - Will handle Requirment 2 and 3 UML diagrams, documentation and coding
+Ivan - Will handle Requirement 1 and 5 UML diagrams, documentation and coding
+Anant - Will handle Requirement 4 UML diagram, documentation and coding
+
+Andy - I accept the WBA
