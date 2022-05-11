@@ -14,15 +14,15 @@ public class WarpPipe extends HighGround{
     private Location currentLocation;
     private WarpPipe connectingPipe;
 
-    public WarpPipe(Location currentLocation, WarpPipe connectingPipe) {
+    public WarpPipe(WarpPipe connectingPipe) {
         super('C', 0, 1);
-        this.currentLocation = currentLocation;
         this.connectingPipe = connectingPipe;
         this.addCapability(Status.SPAWN_PIRANHA);
     }
 
     @Override
     public void tick(Location location) {
+        this.currentLocation = location;
         if (this.hasCapability(Status.SPAWN_PIRANHA)){
             location.addActor(new PiranhaPlant());
             this.removeCapability(Status.SPAWN_PIRANHA);
