@@ -13,4 +13,5 @@ public enum Status {
     CAN_RESET, // status allowing the player to reset the game
     FERTILE, // status applied to ground that marks them as fertile
     REMOVE_STAR, // status for the PowerStar class to know if the player reset their status
+    SPAWN_PIRANHA
 }
