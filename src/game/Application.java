@@ -15,10 +15,7 @@ import game.actors.Toad;
 import game.items.Coin;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
-import game.terrain.Dirt;
-import game.terrain.Floor;
-import game.terrain.Sprout;
-import game.terrain.Wall;
+import game.terrain.*;
 
 /**
  * The main class for the Mario World game.
@@ -30,7 +27,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -67,7 +64,33 @@ public class Application {
 
 
 
-		world.run();
+			// Lava map
+			List<String> lavaMap = Arrays.asList(
+					".L...............LLLLLLLL..............................................",
+					"L.................LLLLLLLL...................................+.........",
+					"................LLLLLLLLLL.............................................",
+					"..................LLLLLLLL.............................................",
+					"...................LLLLLL..........+...............LL..................",
+					"..................LLLLLL..........................LLLLL................",
+					"..............LLLLLLLLLLLLLL.......................LLL.................",
+					"...........LLLLLLLLLLLLLLLLL...........................................",
+					"................LLLLLLL................................................",
+					"....................................................+..................",
+					"........................................+..............................",
+					".................LLLLLL................................................",
+					".....LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+					"......................+......................................+.........",
+					"..................................................+....................",
+					"...........+................+..........................................",
+					".......................................................................");
+
+			GameMap lavaGameMap = new GameMap(groundFactory, lavaMap);
+			world.addGameMap(lavaGameMap);
+			WarpPipe pipe = new WarpPipe(null);
+			lavaGameMap.at(0, 0).setGround(pipe);
+			gameMap.at(42,6).setGround(new WarpPipe(pipe));
+			gameMap.at(44, 6).setGround(new WarpPipe(pipe));
+			world.run();
 
 	}
 }
