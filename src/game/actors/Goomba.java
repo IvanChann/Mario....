@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Monologue;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
@@ -30,9 +31,6 @@ public class Goomba extends Enemy	 implements Resettable {
 		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
 		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
 		registerInstance();
-
-
-
 
 	}
 
@@ -76,6 +74,7 @@ public class Goomba extends Enemy	 implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		super.playTurn(actions, lastAction, map, display);
 		if (Math.random() <= Goomba.SUICIDE_CHANCE || this.remove) {
 			map.removeActor(this);
 			return new DoNothingAction();
@@ -92,5 +91,12 @@ public class Goomba extends Enemy	 implements Resettable {
 	@Override
 	public boolean resetInstance() {
 		return remove = true;
+	}
+
+	@Override
+	public void createMonologues() {
+		monologueList.add(new Monologue("Mugga mugga!"));
+		monologueList.add(new Monologue("Ugha ugha... (Never gonna run around and desert you...)"));
+		monologueList.add(new Monologue("Ooga-Chaka Ooga-Ooga!"));
 	}
 }
