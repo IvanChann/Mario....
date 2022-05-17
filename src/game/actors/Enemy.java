@@ -41,6 +41,8 @@ public abstract class Enemy extends NPC {
      * @return Action to be taken in current turn
      */
     @Override
-    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+        return super.playTurn(actions, lastAction, map, display);
+    }
     }
 
