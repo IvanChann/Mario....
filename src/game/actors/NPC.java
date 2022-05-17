@@ -2,10 +2,13 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.MonologueList;
 import game.behaviours.Behaviour;
+import game.statuses.Status;
 
 import java.util.Collections;
 import java.util.Map;
@@ -15,6 +18,7 @@ public abstract class NPC extends Actor {
 
     protected Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
+    protected MonologueList monologueList = new MonologueList();
     /**
      * Constructor.
      *
@@ -24,6 +28,7 @@ public abstract class NPC extends Actor {
      */
     public NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        createMonologues();
     }
 
     /**
@@ -35,5 +40,15 @@ public abstract class NPC extends Actor {
      * @return The action to be taken
      */
     @Override
-    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+        if (this.hasCapability(Status.TALK)) {
+            monologueList.getRandom().speak(this, display);
+            this.removeCapability(Status.TALK);
+        }
+        else this.addCapability(Status.TALK);
+
+        return new DoNothingAction();
+    }
+
+    public abstract void createMonologues();
 }
