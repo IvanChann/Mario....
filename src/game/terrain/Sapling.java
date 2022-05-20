@@ -27,6 +27,7 @@ public class Sapling extends Tree implements Resettable {
         if (age == 10) {
             if (Math.random() < 0.5){
                 location.addItem(new FireFlower());
+                location.setGround(new Mature());
             } else {
                 location.setGround(new Mature());
             }
