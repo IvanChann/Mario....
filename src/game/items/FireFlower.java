@@ -9,14 +9,13 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.statuses.Status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FireFlower extends Item implements Consumable{
-    /**
-     * A timer representing how many turns Fire Flower will last
-     */
+
     private int timer = 20;
-    /**
-     * Whether the Fire Flower has been consumed yet
-     */
+
     private boolean consumed = false;
 
     public FireFlower() {
