@@ -5,20 +5,19 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.items.Fire;
 import game.statuses.Status;
+import edu.monash.fit2099.engine.positions.GameMap;
 
+public class FireAttackAction extends AttackAction {
 
-public class FireAttackAction extends Action {
-
-    private final Actor target;
-
-
-    private final String direction;
+    private int turns = 3;
 
     public FireAttackAction(Actor target, String direction){
-        this.target = target;
-        this.direction = direction;
+        super(target, direction);
     }
 
+    public void effectsOfAttack(Actor target, Gamemap map){
+        map.locationOf(taget).addItem(new Fire(turns));
+    }
     @Override
     public String execute(Actor actor, GameMap map) {
         if (actor.hasCapability(Status.FIRE_ATTACK)){
