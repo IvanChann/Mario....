@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.AttackAction;
+import game.actions.NormalAttack;
 import game.statuses.Status;
 
 public class AttackBehaviour implements Behaviour {
@@ -25,7 +25,7 @@ public class AttackBehaviour implements Behaviour {
             Location destination = exit.getDestination();
             if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
 
-                return new AttackAction(destination.getActor(), exit.getName());
+                return new NormalAttack(destination.getActor(), exit.getName());
             }
         }
         return null;
