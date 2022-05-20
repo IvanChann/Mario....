@@ -34,5 +34,16 @@ public class FireFlower extends Item implements Consumable{
         this.addCapability(Status.FIRE_ATTACK);
     }
 
+    @Override
+    public void tick(Location currentLocation, Actor actor) {
+        if (actor.hasCapability(Status.FIRE_ATTACK)){
+            this.timer -= 1;
+        }
+        if (this.timer == 0){
+            actor.removeCapability(Status.FIRE_ATTACK);
+            actor.removeItemFromInventory(this);
+        }
+        System.out.println(timer + " turns of fire attack remaining");
+    }
 
 }
