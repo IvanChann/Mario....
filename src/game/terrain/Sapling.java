@@ -1,5 +1,6 @@
 package game.terrain;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.FireFlower;
 import game.reset.Resettable;
 import game.items.Coin;
 
@@ -24,7 +25,11 @@ public class Sapling extends Tree implements Resettable {
     public void tick(Location location) {
         age++;
         if (age == 10) {
-            location.setGround(new Mature());
+            if (Math.random() < 0.5){
+                location.addItem(new FireFlower());
+            } else {
+                location.setGround(new Mature());
+            }
         }
         else if (Math.random() < 0.1) {
             location.addItem(new Coin(20));
