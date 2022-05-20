@@ -1,6 +1,7 @@
 package game.terrain;
 import game.actors.Goomba;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.FireFlower;
 import game.reset.Resettable;
 
 /**
@@ -24,7 +25,11 @@ public class Sprout extends Tree implements Resettable {
     public void tick(Location location) {
         age++;
         if (age == 10) {
-            location.setGround(new Sapling());
+            if (Math.random() < 0.5){
+                location.addItem(new FireFlower());
+            } else{
+                location.setGround(new Sapling());
+            }
         }
         else if (!location.containsAnActor() && Math.random() < 0.1) {
             location.addActor(new Goomba());
