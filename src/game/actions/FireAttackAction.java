@@ -31,4 +31,5 @@ public class FireAttackAction extends Action {
     public String menuDescription(Actor actor) {
         return actor + " can attack " + target + " at " + direction + " with fire!";
     }
+
 }
