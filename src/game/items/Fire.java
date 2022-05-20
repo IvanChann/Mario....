@@ -14,5 +14,15 @@ public class Fire  extends Item {
         this.turns = turns;
     }
 
-
+    @Override
+    public void tick(Location currentLocation) {
+        if (turns == 0){
+            currentLocation.removeItem(this);
+        }
+        if (currentLocation.containsAnActor()){
+            currentLocation.getActor().hurt(damage);
+        }
+        turns -= 1;
+        super.tick(currentLocation);
+    }
 }
