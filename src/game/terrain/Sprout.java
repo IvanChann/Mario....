@@ -27,6 +27,7 @@ public class Sprout extends Tree implements Resettable {
         if (age == 10) {
             if (Math.random() < 0.5){
                 location.addItem(new FireFlower());
+                location.setGround(new Sapling());
             } else{
                 location.setGround(new Sapling());
             }
