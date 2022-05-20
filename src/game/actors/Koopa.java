@@ -7,9 +7,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.AttackAction;
+import game.actions.NormalAttack;
 import game.actions.DestroyShellAction;
-import game.actions.FireAttackAction;
+import game.actions.FireAttack;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
@@ -60,11 +60,11 @@ public class Koopa extends Enemy implements Resettable {
         ActionList actions = new ActionList();
         if (!dormant) {
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                actions.add(new AttackAction(this, direction));
+                actions.add(new NormalAttack(this, direction));
                 behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
             }
             if (otherActor.hasCapability(Status.FIRE_ATTACK)){
-                actions.add(new FireAttackAction(this, direction));
+                actions.add(new FireAttack(this, direction));
             }
         }
         else {
