@@ -8,13 +8,13 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.FireAttackAction;
+import game.actions.FireAttack;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
 import game.statuses.Status;
 import game.behaviours.WanderBehaviour;
-import game.actions.AttackAction;
+import game.actions.NormalAttack;
 import game.behaviours.Behaviour;
 /**
  * Class representing the Goomba enemy
@@ -31,10 +31,6 @@ public class Goomba extends Enemy	 implements Resettable {
 		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
 		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
 		registerInstance();
-
-
-
-
 	}
 
 	/**
@@ -53,11 +49,11 @@ public class Goomba extends Enemy	 implements Resettable {
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		ActionList actions = new ActionList();
 		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-			actions.add(new AttackAction(this, direction));
+			actions.add(new NormalAttack(this, direction));
 			behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
 		}
 		if (otherActor.hasCapability(Status.FIRE_ATTACK)){
-			actions.add(new FireAttackAction(this, direction));
+			actions.add(new FireAttack(this, direction));
 		}
 
 		return actions;
