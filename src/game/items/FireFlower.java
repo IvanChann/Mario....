@@ -46,4 +46,13 @@ public class FireFlower extends Item implements Consumable{
         System.out.println(timer + " turns of fire attack remaining");
     }
 
+    @Override
+    public List<Action> getAllowableActions() {
+        if (!consumed) {
+            ArrayList<Action> actions = new ArrayList<>();
+            actions.add(new ConsumeAction(this));
+            return actions;
+        }
+        return super.getAllowableActions();
+    }
 }
