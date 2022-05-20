@@ -23,5 +23,16 @@ public class FireFlower extends Item implements Consumable{
         super("Fire Flower", 'f', true);
     }
 
+    @Override
+    public void consumedBy(Actor actor, GameMap map) {
+        if (map.locationOf(actor).getItems().contains(this)) {
+            map.locationOf(actor).removeItem(this);
+            actor.addItemToInventory(this);
+        }
+        this.togglePortability();       // consumed item cannot be dropped
+        this.consumed = true;
+        this.addCapability(Status.FIRE_ATTACK);
+    }
+
 
 }
