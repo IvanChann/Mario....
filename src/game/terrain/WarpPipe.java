@@ -5,9 +5,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.WarpAction;
 import game.actors.PiranhaPlant;
+import game.reset.Resettable;
 import game.statuses.Status;
 
-public class WarpPipe extends HighGround{
+public class WarpPipe extends HighGround implements Resettable {
     /**
      * Constructor for High Ground's
      */
@@ -44,5 +45,10 @@ public class WarpPipe extends HighGround{
 
     public void setConnectingPipe(WarpPipe connectingPipe) {
         this.connectingPipe = connectingPipe;
+    }
+
+    @Override
+    public boolean resetInstance() {
+        return false;
     }
 }
