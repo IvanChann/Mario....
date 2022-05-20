@@ -17,9 +17,10 @@ public class FireFlower extends Item implements Consumable{
     private int timer = 20;
 
     private boolean consumed = false;
-
+    /***
+     * Constructor.
+     */
     public FireFlower() {
-
         super("Fire Flower", 'f', true);
     }
 
@@ -33,17 +34,22 @@ public class FireFlower extends Item implements Consumable{
         this.consumed = true;
         this.addCapability(Status.FIRE_ATTACK);
     }
-
+    /**
+     * Ticks down timer each turn, removes from inventory at 0,
+     * then remove it from the inventory upon reset
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         if (actor.hasCapability(Status.FIRE_ATTACK)){
             this.timer -= 1;
+            System.out.println(timer + " turns of fire attack remaining");
         }
         if (this.timer == 0){
             actor.removeCapability(Status.FIRE_ATTACK);
             actor.removeItemFromInventory(this);
         }
-        System.out.println(timer + " turns of fire attack remaining");
     }
 
     @Override
