@@ -3,13 +3,17 @@ package game.actors;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
+import game.actions.NormalAttack;
+import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
 import game.Monologue;
 import game.actions.AttackAction;
+import game.statuses.Status;
 
 public class PiranhaPlant extends Enemy implements Resettable {
     /**
@@ -23,6 +27,16 @@ public class PiranhaPlant extends Enemy implements Resettable {
     }
 
     @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new NormalAttack(this, direction));
+        }
+
+        return actions;
+    }
+
+    @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(90, "chomps");
     }
@@ -31,12 +45,6 @@ public class PiranhaPlant extends Enemy implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         super.playTurn(actions, lastAction, map, display);
         return new DoNothingAction();
-    }
-
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
-        return actions;
     }
 
     @Override
