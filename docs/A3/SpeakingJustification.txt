@@ -1,0 +1,13 @@
+Monologue is a new class to represent a sentence an Actor can say. This allows us to easily extend the functionality being
+much better than simply using a String. Monologue stores a String representing the sentence to be said and a condition
+in the case that it is talking to another Actor. This condition is a Capability the Actor must have in order to speak
+that Monologue.
+
+MonologueList is a class to store Monologues. This is useful as it allows us to add functionality such as randomly
+selecting a Monologue, adhering to OCP and SRP
+
+As all NPCs can talk, a 1 to 1 association with MonologueList is added to store all the Monologues the NPC can speak.
+The playTurn method in NPC checks if there is the TALK status, picking a random Monologue to speak, if not then it will
+add the TALK status. This implements the talking on alternating turns for every NPC.
+
+With the new Monologue and MonologueList the TalkAction was modified to use these classes.
