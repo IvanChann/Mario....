@@ -5,12 +5,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.AttackAction;
+import game.actions.FireAttack;
+import game.actions.NormalAttack;
 import game.statuses.Status;
 
 public class AttackBehaviour implements Behaviour {
-
-    public static final Integer PRIORITY = 10;
 
     /**
      * Scans if there is a hostile actor nearby, if there is, then prepares to attack
@@ -24,8 +23,12 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
-
-                return new AttackAction(destination.getActor(), exit.getName());
+                if (actor.hasCapability(Status.FIERY)) {
+                    return new FireAttack(destination.getActor(), exit.getName());
+                }
+                else{
+                    return new NormalAttack(destination.getActor(), exit.getName());
+                }
             }
         }
         return null;
