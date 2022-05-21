@@ -3,17 +3,15 @@ package game.actions;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.statuses.Status;
 
 /**
  * Special Action for attacking other Actors.
  */
-public class AttackAction extends Action {
+public abstract class AttackAction extends Action {
 
 	/**
 	 * The Actor that is to be attacked
@@ -54,10 +52,29 @@ public class AttackAction extends Action {
 
 		Weapon weapon = actor.getWeapon();
 
+		effectsOfAttack(target, map);
+
 		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
 			return actor + " misses " + target + ".";
 		}
 
+		int damage = getDamage(actor, weapon);
+
+		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+
+
+		target.hurt(damage);
+		if (!target.isConscious()) {
+			DeathMechanic.death(target, map);
+			result += System.lineSeparator() + target + " is killed.";
+		}
+
+		return result;
+	}
+
+
+
+	protected int getDamage(Actor actor, Weapon weapon) {
 		int damage = weapon.damage();
 
 		if (actor.hasCapability(Status.GLOWING)){
@@ -67,25 +84,11 @@ public class AttackAction extends Action {
 		if (target.hasCapability(Status.GLOWING)){
 			damage = 0;
 		}
-
-		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-
-
-		target.hurt(damage);
-		if (!target.isConscious()) {
-			ActionList dropActions = new ActionList();
-			// drop all items
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction(actor));
-			for (Action drop : dropActions)
-				drop.execute(target, map);
-			// remove actor
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
-		}
-
-		return result;
+		return damage;
 	}
+
+	protected abstract void effectsOfAttack(Actor actor, GameMap map);
+
 
 	/**
 	 * Method that displays the option of attacking a target in some specific direction on the menu

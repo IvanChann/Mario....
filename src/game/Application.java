@@ -8,10 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.Goomba;
-import game.actors.Koopa;
-import game.actors.Player;
-import game.actors.Toad;
+import game.actors.*;
 import game.items.Coin;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
@@ -56,8 +53,16 @@ public class Application {
 			Actor mario = new Player("Mario", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
 
-			gameMap.at(45, 11).addActor(new Toad("Toad", 'o', 100));
+			gameMap.at(42, 17).setGround(new PowerFountain());
+			gameMap.at(42, 17).addActor(new WalkingKoopa());
+			gameMap.at(42, 14).setGround(new HealthFountain());
+
+			gameMap.at(45, 11).addActor(new Toad());
 			gameMap.at(42, 9).addItem(new PowerStar());
+
+			gameMap.at(45, 18).addActor(new Bowser(gameMap.at(45, 18)));
+			gameMap.at(46, 18).addActor(new Peach());
+
 
 			gameMap.at(42, 11).addItem(new SuperMushroom());
 			gameMap.at(42, 12).addItem(new Coin(1200));

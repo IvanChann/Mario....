@@ -10,8 +10,13 @@ public enum Status {
     GLOWING, // effect from consuming Power Star
     CAN_DESTROY_SHELL, // status that allows an actor to destroy Koopa shells
     CANNOT_ENTER_FLOOR, // status that prevents an actor from entering floors
+    CAN_REFILL,
     CAN_RESET, // status allowing the player to reset the game
     FERTILE, // status applied to ground that marks them as fertile
     REMOVE_STAR, // status for the PowerStar class to know if the player reset their status
+    CAN_DRINK_FROM,
+    CAN_UNLOCK,
+    CAN_FLY,
+    FIERY,
     SPAWN_PIRANHA
 }

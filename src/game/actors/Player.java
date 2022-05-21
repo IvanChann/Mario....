@@ -2,10 +2,14 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.actions.DeathMechanic;
+import game.managers.BottleManager;
 import game.managers.WalletManager;
 import game.statuses.Status;
 import game.actions.ResetAction;
@@ -14,18 +18,16 @@ import game.reset.Resettable;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, Drinker {
 
 	private final Menu menu = new Menu();
 	private final int initialHitPoints;
+	private int intrinsicDamage = 5;
 
 	/**
 	 * Constructor. Makes player hostile to enemies, and allows the player to reset the game
 	 * Stores the player's starting hit points
 	 *
-	 * @param name        Name to call the player in the UI
-	 * @param displayChar Character to represent the player in the UI
-	 * @param hitPoints   Player's starting number of hit points
 	 */
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
@@ -46,6 +48,10 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
+		if (!this.isConscious()){
+			DeathMechanic.death(this, map);
+			return new DoNothingAction();
+		}
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
@@ -54,6 +60,7 @@ public class Player extends Actor implements Resettable {
 		if (this.hasCapability(Status.CAN_RESET)){
 			actions.add(new ResetAction());
 		}
+
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -65,6 +72,9 @@ public class Player extends Actor implements Resettable {
 	 */
 	@Override
 	public void hurt(int points) {
+		if (this.hasCapability(Status.GLOWING)){
+			return;
+		}
 		super.hurt(points);
 		if (points > 0 && this.hasCapability(Status.TALL)){
 			this.removeCapability(Status.TALL);
@@ -78,6 +88,8 @@ public class Player extends Actor implements Resettable {
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
+
+
 
 	/**
 	 * @see Resettable#resetInstance()
@@ -93,5 +105,20 @@ public class Player extends Actor implements Resettable {
 
 
 		return false;
+	}
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(intrinsicDamage, "punches");
+	}
+
+	@Override
+	public void increaseBaseAttack(int damage) {
+
+		intrinsicDamage += damage;
+	}
+
+	@Override
+	public void increaseHitPoints(int hitPoints) {
+		this.increaseMaxHp(hitPoints);
 	}
 }

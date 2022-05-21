@@ -62,7 +62,7 @@ public abstract class HighGround extends Ground {
      */
     @Override
     public boolean canActorEnter(Actor actor) {
-        return actor.hasCapability(Status.GLOWING);
+        return actor.hasCapability(Status.GLOWING) || actor.hasCapability(Status.CAN_FLY);
     }
 
     /**

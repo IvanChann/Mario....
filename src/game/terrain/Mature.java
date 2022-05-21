@@ -2,7 +2,9 @@ package game.terrain;
 
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.Exit;
+import game.actors.FlyingKoopa;
 import game.actors.Koopa;
+import game.actors.WalkingKoopa;
 import game.reset.Resettable;
 import game.statuses.Status;
 import java.util.ArrayList;
@@ -39,9 +41,12 @@ public class Mature extends Tree implements Resettable {
     public void tick(Location location) {
         age++;
         if (!location.containsAnActor() && Math.random() < 0.15) {
-            location.addActor(new Koopa());
+            if (Math.random() < 0.5) {
+                location.addActor(new WalkingKoopa());
+            } else {
+                location.addActor(new FlyingKoopa());
+            }
         }
-
         if (age%5 == 0){
             ArrayList<Location> fertileGround = new ArrayList<>();
             for (Exit exits : location.getExits()){

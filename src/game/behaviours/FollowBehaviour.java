@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.behaviours.Behaviour;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -15,7 +14,6 @@ import game.behaviours.Behaviour;
  */
 public class FollowBehaviour implements Behaviour {
 
-	public static final Integer PRIORITY = 20;
 	private final Actor target;
 
 	/**

@@ -5,8 +5,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Utils;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.DrinkBehaviour;
 import game.behaviours.WanderBehaviour;
 import game.statuses.Status;
 
@@ -16,8 +18,9 @@ import java.util.Map;
 /**
  * Class representing the enemies of the game
  */
-public abstract class Enemy extends NPC {
+public abstract class Enemy extends NPC implements Drinker {
 
+    protected int intrinsicDamage;
 
     /**
      * Constructor. Makes all enemies unable to enter floors by using a capability
@@ -29,11 +32,13 @@ public abstract class Enemy extends NPC {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.CANNOT_ENTER_FLOOR);
+        behaviours.put(Utils.DRINK_PRIORITY, new DrinkBehaviour());
 
     }
 
     /**
      * Chooses an action to take in the current turn
+     *
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
@@ -41,6 +46,15 @@ public abstract class Enemy extends NPC {
      * @return Action to be taken in current turn
      */
     @Override
-    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+        return super.playTurn(actions, lastAction, map, display);
+    };
+
+    public void increaseBaseAttack(int damage) {
+        intrinsicDamage += damage;
     }
 
+    public void increaseHitPoints(int hitPoints) {
+        this.increaseMaxHp(hitPoints);
+    }
+}

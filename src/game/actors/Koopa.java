@@ -7,8 +7,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.AttackAction;
+import game.Utils;
 import game.actions.DestroyShellAction;
+import game.actions.NormalAttack;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
@@ -19,7 +20,7 @@ import game.statuses.Status;
 /**
  * Class representing the Koopa enemy
  */
-public class Koopa extends Enemy implements Resettable {
+public abstract class Koopa extends Enemy implements Resettable {
     /**
      * The state of Koopa, either dormant or not dormant
      */
@@ -30,17 +31,18 @@ public class Koopa extends Enemy implements Resettable {
      * Constructor. Lets Koopa wander around and attack players on sight
      *
      */
-    public Koopa() {
+    public Koopa(String name, char displayChar, int hitPoints) {
 
-        super("Koopa", 'K', 100);
-        behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
-        behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
+        super(name, displayChar, hitPoints);
+        behaviours.put(Utils.WANDER_PRIORITY, new WanderBehaviour());
+        behaviours.put(Utils.ATTACK_PRIORITY, new AttackBehaviour());
+        intrinsicDamage = 30;
         this.registerInstance();
     }
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(30, "decimates");
+        return new IntrinsicWeapon(intrinsicDamage, "decimates");
     }
 
     /**
@@ -59,8 +61,8 @@ public class Koopa extends Enemy implements Resettable {
         ActionList actions = new ActionList();
         if (!dormant) {
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                actions.add(new AttackAction(this, direction));
-                behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
+                actions.add(new NormalAttack(this, direction));
+                behaviours.put(Utils.FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
             }
         } else{
             if (otherActor.hasCapability(Status.CAN_DESTROY_SHELL)){
@@ -95,6 +97,8 @@ public class Koopa extends Enemy implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        isConscious();
+
         if (remove) {
             map.removeActor(this);
             return new DoNothingAction();
