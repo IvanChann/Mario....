@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Monologue;
 import game.Utils;
 import game.actions.NormalAttack;
 import game.behaviours.AttackBehaviour;
@@ -75,11 +76,17 @@ public class Bowser extends Enemy implements Resettable {
         return actions;
     }
 
+    public void createMonologues() {
+        monologueList.add(new Monologue("What was that sound? Oh, just a fire."));
+        monologueList.add(new Monologue("Princess Peach! You are formally invited... to the creation of my new kingdom!"));
+        monologueList.add(new Monologue("Never gonna let you down!"));
+        monologueList.add(new Monologue("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!"));
+    }
+
     @Override
     public boolean resetInstance() {
         this.resetMaxHp(Utils.BOWSER_INITIAL_HITPOINTS);
         reset = true;
         return false;
     }
-
 }
