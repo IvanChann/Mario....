@@ -2,9 +2,11 @@ package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.DeathMechanic;
 import game.behaviours.Behaviour;
 
 import java.util.Collections;
@@ -35,5 +37,10 @@ public abstract class NPC extends Actor {
      * @return The action to be taken
      */
     @Override
-    public abstract Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display);
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display){
+        if (!this.isConscious()){
+            DeathMechanic.death(this, map);
+        }
+        return new DoNothingAction();
+    };
 }
