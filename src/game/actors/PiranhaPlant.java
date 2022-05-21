@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
 import game.reset.Resettable;
+import game.Monologue;
+import game.actions.AttackAction;
 
 public class PiranhaPlant extends Enemy implements Resettable {
     /**
@@ -29,6 +31,18 @@ public class PiranhaPlant extends Enemy implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         super.playTurn(actions, lastAction, map, display);
         return new DoNothingAction();
+    }
+
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        actions.add(new AttackAction(this, direction));
+        return actions;
+    }
+
+    @Override
+    public void createMonologues() {
+        monologueList.add(new Monologue("Slsstssthshs~! (Never gonna say goodbye~)"));
+        monologueList.add(new Monologue("Ohmnom nom nom nom."));
     }
 
     @Override

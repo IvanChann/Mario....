@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
+import game.Monologue;
+import game.actions.AttackAction;
 import game.actions.DestroyShellAction;
 import game.actions.NormalAttack;
 import game.behaviours.AttackBehaviour;
@@ -99,6 +101,7 @@ public abstract class Koopa extends Enemy implements Resettable {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         isConscious();
 
+        super.playTurn(actions, lastAction, map, display);
         if (remove) {
             map.removeActor(this);
             return new DoNothingAction();
@@ -118,6 +121,12 @@ public abstract class Koopa extends Enemy implements Resettable {
     @Override
     public boolean resetInstance() {
         return remove = true;
+    }
+
+    @Override
+    public void createMonologues() {
+        monologueList.add(new Monologue("Never gonna make you cry!"));
+        monologueList.add(new Monologue("Koopi koopi koopii~!"));
     }
 }
 

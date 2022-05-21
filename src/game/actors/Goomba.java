@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
 import game.actions.NormalAttack;
+import game.Monologue;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
@@ -32,6 +33,9 @@ public class Goomba extends Enemy implements Resettable {
 		behaviours.put(Utils.ATTACK_PRIORITY, new AttackBehaviour());
 		intrinsicDamage = 10;
 		registerInstance();
+
+
+
 
 	}
 
@@ -92,5 +96,12 @@ public class Goomba extends Enemy implements Resettable {
 	@Override
 	public boolean resetInstance() {
 		return remove = true;
+	}
+
+	@Override
+	public void createMonologues() {
+		monologueList.add(new Monologue("Mugga mugga!"));
+		monologueList.add(new Monologue("Ugha ugha... (Never gonna run around and desert you...)"));
+		monologueList.add(new Monologue("Ooga-Chaka Ooga-Ooga!"));
 	}
 }
