@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Monologue;
 import game.actions.EndGameAction;
 import game.statuses.Status;
 
@@ -33,5 +34,11 @@ public class Peach extends NPC {
         }
 
         return actions;
+    }
+
+    public void createMonologues() {
+        monologueList.add(new Monologue("Dear Mario, I'll be waiting for you..."));
+        monologueList.add(new Monologue("Never gonna give you up!"));
+        monologueList.add(new Monologue("Release me, or I will kick you!"));
     }
 }
