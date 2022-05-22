@@ -11,6 +11,7 @@ import game.Utils;
 import game.Monologue;
 import game.actions.AttackAction;
 import game.actions.DestroyShellAction;
+import game.actions.FireAttack;
 import game.actions.NormalAttack;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
@@ -65,6 +66,9 @@ public abstract class Koopa extends Enemy implements Resettable {
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 actions.add(new NormalAttack(this, direction));
                 behaviours.put(Utils.FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
+            }
+            if (otherActor.hasCapability(Status.FIRE_ATTACK)){
+                actions.add(new FireAttack(this, direction));
             }
         } else{
             if (otherActor.hasCapability(Status.CAN_DESTROY_SHELL)){
