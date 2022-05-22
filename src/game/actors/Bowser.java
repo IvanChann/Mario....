@@ -41,7 +41,7 @@ public class Bowser extends Enemy implements Resettable {
         behaviours.put(Utils.ATTACK_PRIORITY, new AttackBehaviour());
         this.startLocation = location;
         this.addItemToInventory(new Key());
-        this.addCapability(Status.FIERY);
+        this.addCapability(Status.FIRE_ATTACK);
         intrinsicDamage = 80;
         this.registerInstance();
     }

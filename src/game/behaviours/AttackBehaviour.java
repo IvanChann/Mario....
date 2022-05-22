@@ -23,7 +23,7 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
-                if (actor.hasCapability(Status.FIERY)) {
+                if (actor.hasCapability(Status.FIRE_ATTACK)) {
                     return new FireAttack(destination.getActor(), exit.getName());
                 }
                 else{
