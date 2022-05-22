@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Monologue;
 import game.Utils;
+import game.actions.FireAttack;
 import game.actions.NormalAttack;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
@@ -100,7 +101,9 @@ public class Bowser extends Enemy implements Resettable {
             actions.add(new NormalAttack(this, direction));
             behaviours.put(Utils.FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
         }
-
+        if (otherActor.hasCapability(Status.FIRE_ATTACK)){
+            actions.add(new FireAttack(this, direction));
+        }
         return actions;
     }
 
