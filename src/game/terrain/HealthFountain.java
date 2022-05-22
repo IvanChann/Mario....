@@ -9,6 +9,9 @@ import game.actors.Drinker;
 import game.items.Water;
 import game.statuses.Status;
 
+/**
+ * Class representing the Health Fountain
+ */
 public class HealthFountain extends Fountain{
     private int healing = 50;
     /**
@@ -20,7 +23,10 @@ public class HealthFountain extends Fountain{
     }
 
 
-
+    /**
+     * @see Fountain#giveEffects(Drinker)
+     * @param actor Drinker who will receive the effects
+     */
     @Override
     public void giveEffects(Drinker actor) {
         actor.increaseHitPoints(healing);   ;
