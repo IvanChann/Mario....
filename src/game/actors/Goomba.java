@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
+import game.actions.FireAttack;
 import game.actions.NormalAttack;
 import game.Monologue;
 import game.behaviours.AttackBehaviour;
@@ -58,7 +59,9 @@ public class Goomba extends Enemy implements Resettable {
 			actions.add(new NormalAttack(this, direction));
 			behaviours.put(Utils.FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
 		}
-
+		if (otherActor.hasCapability(Status.FIRE_ATTACK)){
+			actions.add(new FireAttack(this, direction));
+		}
 		return actions;
 	}
 
