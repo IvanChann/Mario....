@@ -94,10 +94,10 @@ public abstract class AttackAction extends Action {
 
 	/**
 	 * Applies the different effects of different types of attacks
-	 * @param actor Actor doing the attack
+	 * @param target Actor receiving the attack
 	 * @param map Map that actor is on
 	 */
-	protected abstract void effectsOfAttack(Actor actor, GameMap map);
+	protected abstract void effectsOfAttack(Actor target, GameMap map);
 
 
 	/**

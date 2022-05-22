@@ -18,6 +18,11 @@ public class FireAttack extends AttackAction{
         super(target, direction);
     }
 
+    /**
+     * @see AttackAction#effectsOfAttack(Actor, GameMap)
+     * @param target Actor receiving the attack
+     * @param map Map that actor is on
+     */
     @Override
     protected void effectsOfAttack(Actor target, GameMap map) {
         map.locationOf(target).addItem(new Fire(turns));
