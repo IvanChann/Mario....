@@ -11,7 +11,9 @@ import game.statuses.Status;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class representing the Fire Flower item
+ */
 public class FireFlower extends Item implements Consumable{
 
     private int timer = 20;
@@ -23,7 +25,11 @@ public class FireFlower extends Item implements Consumable{
     public FireFlower() {
         super("Fire Flower", 'f', true);
     }
-
+    /** Adds the effects of consuming the fire flower to the player
+     * @see Consumable#consumedBy(Actor, GameMap)
+     * @param actor The actor who consumes the item
+     * @param map The map containing the actor
+     */
     @Override
     public void consumedBy(Actor actor, GameMap map) {
         if (map.locationOf(actor).getItems().contains(this)) {
@@ -52,7 +58,10 @@ public class FireFlower extends Item implements Consumable{
             actor.removeItemFromInventory(this);
         }
     }
-
+    /**
+     * Returns a list with a ConsumeAction inside it
+     * @return a list of actions that can be done to this Fire Flower
+     */
     @Override
     public List<Action> getAllowableActions() {
         if (!consumed) {
