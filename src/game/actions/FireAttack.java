@@ -5,6 +5,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.items.Fire;
 
+/**
+ * Class representing the Fire Attack that Bowser and Player can use
+ */
 public class FireAttack extends AttackAction{
     private int turns = 3;
 
