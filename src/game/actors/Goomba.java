@@ -8,19 +8,20 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.FireAttack;
+import game.Utils;
+import game.actions.NormalAttack;
+import game.Monologue;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
 import game.statuses.Status;
 import game.behaviours.WanderBehaviour;
-import game.actions.NormalAttack;
 import game.behaviours.Behaviour;
 /**
  * Class representing the Goomba enemy
  * @author Andy Ouyang
  */
-public class Goomba extends Enemy	 implements Resettable {
+public class Goomba extends Enemy implements Resettable {
 	public static final double SUICIDE_CHANCE = 0.1;
 	private boolean remove = false;
 	/**
@@ -28,9 +29,14 @@ public class Goomba extends Enemy	 implements Resettable {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 20);
-		behaviours.put(WanderBehaviour.PRIORITY, new WanderBehaviour());
-		behaviours.put(AttackBehaviour.PRIORITY, new AttackBehaviour());
+		behaviours.put(Utils.WANDER_PRIORITY, new WanderBehaviour());
+		behaviours.put(Utils.ATTACK_PRIORITY, new AttackBehaviour());
+		intrinsicDamage = 10;
 		registerInstance();
+
+
+
+
 	}
 
 	/**
@@ -50,10 +56,7 @@ public class Goomba extends Enemy	 implements Resettable {
 		ActionList actions = new ActionList();
 		if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
 			actions.add(new NormalAttack(this, direction));
-			behaviours.put(FollowBehaviour.PRIORITY, new FollowBehaviour(otherActor));
-		}
-		if (otherActor.hasCapability(Status.FIRE_ATTACK)){
-			actions.add(new FireAttack(this, direction));
+			behaviours.put(Utils.FOLLOW_PRIORITY, new FollowBehaviour(otherActor));
 		}
 
 		return actions;
@@ -62,7 +65,7 @@ public class Goomba extends Enemy	 implements Resettable {
 
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(10, "obliterates");
+		return new IntrinsicWeapon(intrinsicDamage, "obliterates");
 	}
 
 	/**
@@ -76,6 +79,7 @@ public class Goomba extends Enemy	 implements Resettable {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		super.playTurn(actions, lastAction, map, display);
 		if (Math.random() <= Goomba.SUICIDE_CHANCE || this.remove) {
 			map.removeActor(this);
 			return new DoNothingAction();
@@ -92,5 +96,12 @@ public class Goomba extends Enemy	 implements Resettable {
 	@Override
 	public boolean resetInstance() {
 		return remove = true;
+	}
+
+	@Override
+	public void createMonologues() {
+		monologueList.add(new Monologue("Mugga mugga!"));
+		monologueList.add(new Monologue("Ugha ugha... (Never gonna run around and desert you...)"));
+		monologueList.add(new Monologue("Ooga-Chaka Ooga-Ooga!"));
 	}
 }

@@ -11,8 +11,6 @@ import game.statuses.Status;
 
 public class AttackBehaviour implements Behaviour {
 
-    public static final Integer PRIORITY = 10;
-
     /**
      * Scans if there is a hostile actor nearby, if there is, then prepares to attack
      * @param actor the Actor acting
@@ -25,7 +23,7 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.containsAnActor() && destination.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)){
-                if (actor.hasCapability(Status.FIRE_ATTACK)){
+                if (actor.hasCapability(Status.FIERY)) {
                     return new FireAttack(destination.getActor(), exit.getName());
                 }
                 else{

@@ -14,26 +14,21 @@ public class TalkAction extends Action {
     /**
      * Actor that is to be talked to
      */
-    protected Actor target;
+    private Actor target;
 
     /**
      * This list of lines that can be said
      */
-    protected ArrayList<String> dialogues;
+    private String sentence;
 
     /**
      * Random number generator
      */
-    protected Random rand = new Random();
+    private Random rand = new Random();
 
-    /**
-     * Constructor
-     * @param target The actor being talked to
-     * @param dialogues list of lines that can be said
-     */
-    public TalkAction(Actor target, ArrayList<String> dialogues){
+    public TalkAction(Actor target, String sentence){
         this.target = target;
-        this.dialogues = dialogues;
+        this.sentence = sentence;
     }
 
     /**
@@ -41,7 +36,7 @@ public class TalkAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return actor + ": " + dialogues.get(rand.nextInt(dialogues.size())); // return random line from dialogues
+        return target + ": " + sentence; // return random line from dialogues
     }
 
     /**

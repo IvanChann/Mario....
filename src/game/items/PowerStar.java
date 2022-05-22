@@ -81,8 +81,8 @@ public class PowerStar extends Item implements Consumable, Purchasable{
         if (map.locationOf(actor).getItems().contains(this)) {
             map.locationOf(actor).removeItem(this);
             actor.addItemToInventory(this);
+            this.togglePortability();
         }
-        this.togglePortability();       // consumed item cannot be dropped
         this.consumed = true;
         actor.heal(PowerStar.HEALING);
         this.addCapability(Status.GLOWING);

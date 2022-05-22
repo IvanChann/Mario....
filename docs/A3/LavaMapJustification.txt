@@ -1,0 +1,24 @@
+WarpPipe is a class that extends from HighGround. As HighGround already implements an Actor jumping onto it, we do not
+need to implement it in WarpPipe apart from setting the successRate and damage values following DRY. This also follows
+LSP.
+
+WarpPipe has an association to itself. This is as a WarpPipe needs to know which other WarpPipe to warp to making it a
+1 to 1 association.
+WarpPipe also has a 1 to 1 association to Location. A Ground class does not have an association to Location but this is needed in
+WarpPipe in order to know which Location the WarpPipe is at. This is important as the Player warps to a Location,
+not a Ground.
+
+When an actor is standing on the WarpPipe a WarpAction is created.
+WarpAction extends from Action and handles warping an actor from a WarpPipe to another.
+This means WarpAction needs an association with WarpPipe, storing the source pipe and the connecting pipe (1 to 2)
+The actual warping can be done with the moveActor method in GameMap, effectively using the engine code.
+The Location to warp to is an attribute in the connecting pipe.
+
+The Lava Map is created and added to World in Application.
+If more maps were added it might be useful to implement the maps elsewhere rather than Application to adhere to SRP but
+as this is the only map added it seemed unnecessary.
+The Lava Map contains a new ground type Lava which extends from Ground.
+Ground already has a dependency on Location in the Tick method so no new dependencies are needed.
+Every tick, the Lava will check Location if there is an Actor and damage them.
+
+
