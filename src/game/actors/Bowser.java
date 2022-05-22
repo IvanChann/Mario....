@@ -45,7 +45,6 @@ public class Bowser extends Enemy implements Resettable {
         intrinsicDamage = 80;
         this.registerInstance();
     }
-
     /**
      * @see Actor#getIntrinsicWeapon()
      */

@@ -10,7 +10,6 @@ import game.actions.NormalAttack;
 import game.statuses.Status;
 
 public class AttackBehaviour implements Behaviour {
-
     /**
      * Scans if there is a hostile actor nearby, if there is, then prepares to attack
      * @param actor the Actor acting
