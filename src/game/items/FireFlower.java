@@ -42,7 +42,8 @@ public class FireFlower extends Item implements Consumable{
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        if (actor.hasCapability(Status.FIRE_ATTACK)){
+        if (actor.hasCapability(Status.FIRE_ATTACK) && this.consumed){
+
             this.timer -= 1;
             System.out.println(timer + " turns of fire attack remaining");
         }
