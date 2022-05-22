@@ -9,7 +9,7 @@ import game.statuses.Status;
 
 public class FlyingKoopa extends Koopa{
     /**
-     * Constructor. Makes all enemies unable to enter floors by using a capability
+     * Constructor.
      *
      */
     public FlyingKoopa() {

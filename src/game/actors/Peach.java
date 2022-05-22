@@ -19,13 +19,21 @@ public class Peach extends NPC {
         super("Peach", 'P', 100);
     }
 
+
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
         return new DoNothingAction();
     }
 
-
+    /**
+     * Generates an EndGameAction if the player has a key
+     * @see Actor#allowableActions(Actor, String, GameMap)
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return Actions that can be performed
+     */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
