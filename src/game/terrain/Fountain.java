@@ -12,6 +12,9 @@ import game.items.Water;
 import game.managers.BottleManager;
 import game.statuses.Status;
 
+/**
+ * Abstract class representing a Fountain
+ */
 public abstract class Fountain extends Ground {
     private int capacity = Utils.FOUNTAIN_MAX_CAPACITY;
     private int refillTimer = Utils.FOUNTAIN_COOLDOWN_TIMER;
@@ -25,6 +28,15 @@ public abstract class Fountain extends Ground {
         this.addCapability(Status.CAN_DRINK_FROM);
     }
 
+    /**
+     * Lets an actor refill from this fountain or drink from this fountain depending on
+     * the capacity of the fountain
+     * @see Ground#allowableActions(Actor, Location, String)
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return Actions that can be performed on this fountain
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
@@ -42,6 +54,11 @@ public abstract class Fountain extends Ground {
         return actions;
     }
 
+    /**
+     * Checks if Fountain is empty, if it is start the refresh timer
+     * @see Ground#tick(Location)
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (refillTimer == 0){
@@ -54,6 +71,9 @@ public abstract class Fountain extends Ground {
         }
     }
 
+    /**
+     * Reduces capacity of the fountain by a fixed amount
+     */
     public void reduceCapacity(){
         capacity -= Utils.FOUNTAIN_FILL_COST;
     }
@@ -62,6 +82,11 @@ public abstract class Fountain extends Ground {
         return this + " Fountain " + "(" + capacity + "/" + Utils.FOUNTAIN_MAX_CAPACITY + ")";
     }
 
+    /**
+     * Gives a specific effect to the actor from drinking from this fountain. Effects vary
+     * with each fountain
+     * @param actor Drinker who will receive the effects
+     */
     public abstract void giveEffects(Drinker actor);
 
 
