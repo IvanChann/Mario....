@@ -73,7 +73,12 @@ public abstract class AttackAction extends Action {
 	}
 
 
-
+	/**
+	 * Method for calculating the damage in the attack
+	 * @param actor Actor doing the attack
+	 * @param weapon Weapon that the actor potentially holds
+	 * @return Integer representing damage to be dealt
+	 */
 	protected int getDamage(Actor actor, Weapon weapon) {
 		int damage = weapon.damage();
 
@@ -87,6 +92,11 @@ public abstract class AttackAction extends Action {
 		return damage;
 	}
 
+	/**
+	 * Applies the different effects of different types of attacks
+	 * @param actor Actor doing the attack
+	 * @param map Map that actor is on
+	 */
 	protected abstract void effectsOfAttack(Actor actor, GameMap map);
 
 
