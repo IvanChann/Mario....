@@ -20,5 +20,4 @@ public enum Status {
     CAN_DRINK_FROM,
     CAN_UNLOCK,
     CAN_FLY,
-    FIERY,
 }
