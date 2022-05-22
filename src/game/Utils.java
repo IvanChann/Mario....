@@ -11,4 +11,5 @@ public final class Utils {
     public static final int FOUNTAIN_COOLDOWN_TIMER = 5;
     public static final int BOWSER_INITIAL_HITPOINTS = 500;
     public static final int PIRANHAPLANT_HEAL = 50;
+    public static final int BOTTLE_MAX_CAPACITY = 10;
 }
