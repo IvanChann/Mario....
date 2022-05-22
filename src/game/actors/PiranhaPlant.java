@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
+import game.actions.FireAttack;
 import game.actions.NormalAttack;
 import game.behaviours.FollowBehaviour;
 import game.reset.Resettable;
@@ -39,7 +40,9 @@ public class PiranhaPlant extends Enemy implements Resettable {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new NormalAttack(this, direction));
         }
-
+        if (otherActor.hasCapability(Status.FIRE_ATTACK)){
+            actions.add(new FireAttack(this, direction));
+        }
         return actions;
     }
 
